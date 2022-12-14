@@ -219,19 +219,19 @@
                         <?php if ($row['calon_3'] != '') : ?>
                             <div class="mb-3">
                                 <label for="calon_3" class="col-form-label">Suara (3) <?= $row['calon_3']; ?></label>
-                                <input type="number" name="calon3" class="form-control" placeholder="Masukan jumlah suara <?= $row['calon_3']; ?>">
+                                <input type="number" name="calon3" class="form-control" placeholder="Masukan jumlah suara (3) <?= $row['calon_3']; ?>">
                             </div> 
                     <?php endif; ?>
                         <?php if ($row['calon_4'] != '') : ?>
                             <div class="mb-3">
-                                <label for="calon_4" class="col-form-label">Calon 4</label>
-                                <input type="number" name="calon4" class="form-control" placeholder="Masukan jumlah suara calon 4">                                
+                                <label for="calon_4" class="col-form-label">Suara (4) <?= $row['calon_4']; ?></label>
+                                <input type="number" name="calon4" class="form-control" placeholder="Masukan jumlah suara (4) <?= $row['calon_4']; ?>">                                
                             </div> 
                     <?php endif; ?>
                     <?php if ($row['calon_5'] != '') : ?>
                     <div class="mb-3">
-                        <label for="calon_5" class="col-form-label">Calon 5</label>
-                        <input type="number" name="calon5" class="form-control" placeholder="Masukan jumlah suara calon 5">                        
+                        <label for="calon_5" class="col-form-label">Suara (5) <?= $row['calon_5']; ?></label>
+                        <input type="number" name="calon5" class="form-control" placeholder="Masukan jumlah suara (5) <?= $row['calon_5']; ?>">                        
                     </div> 
                     <?php endif; ?>
                     <?php break; ?>
@@ -270,7 +270,7 @@
                                 value="<?= $row['jml_pml_tetap']; ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="mgn_hak_suara" class="col-form-label">mgn_hak_suara</label>
+                            <label for="mgn_hak_suara" class="col-form-label">Jumah Yang Menggunakan Hak Suara</label>
                             <input type="number" name="mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang menggunakan hak suara"
                                 value="<?= $row['mgn_hak_suara']; ?>">
                         </div>
@@ -285,33 +285,36 @@
                                 value="<?= $row['suara_tdk_sah']; ?>">
                         </div> 
                         <div class="mb-3">
-                            <label for="calon1" class="col-form-label">Calon 1</label>
-                            <input type="number" name="calon1" class="form-control" placeholder="Masukan jumlah suara calon 1"
+                            <label for="calon1" class="col-form-label">Suara (1) <?= $row['calon_1']; ?></label>
+                            <input type="number" name="calon1" class="form-control" placeholder="Masukan jumlah suara (1) <?= $row['calon_1']; ?>"
                                 value="<?= $row['calon1']; ?>">
                         </div> 
                         <div class="mb-3">
-                            <label for="calon2" class="col-form-label">Calon 2</label>
-                            <input type="number" name="calon2" class="form-control" placeholder="Masukan jumlah suara calon 2"
+                            <label for="calon2" class="col-form-label">Suara (2) <?= $row['calon_2']; ?></label>
+                            <input type="number" name="calon2" class="form-control" placeholder="Masukan jumlah suara (2) <?= $row['calon_2']; ?>"
                                 value="<?= $row['calon2']; ?>">
                         </div> 
-                        <div class="mb-3">
-                            <label for="calon3" class="col-form-label">Calon 3</label>
-                            <input type="number" name="calon3" class="form-control" placeholder="Masukan jumlah suara calon 3"
-                                value="<?= $row['calon3']; ?>">
-                                <p class="text-danger">*Harap di kosongkan apabila TPS ini tidak mempunyai calon Ketiga</p>
-                        </div> 
-                        <div class="mb-3">
-                            <label for="calon4" class="col-form-label">Calon 4</label>
-                            <input type="number" name="calon4" class="form-control" placeholder="Masukan jumlah suara calon 4"
-                                value="<?= $row['calon4']; ?>">
-                            <p class="text-danger">*Harap di kosongkan apabila TPS ini tidak mempunyai calon Keempat</p>
-                        </div> 
-                        <div class="mb-3">
-                            <label for="calon5" class="col-form-label">Calon 5</label>
-                            <input type="number" name="calon5" class="form-control" placeholder="Masukan jumlah suara calon 5"
-                                value="<?= $row['calon5']; ?>">
-                            <p class="text-danger">*Harap di kosongkan apabila TPS ini tidak mempunyai calon Kelima</p>
-                        </div>                    
+                        <?php if ($row['calon_3'] != '') : ?>
+                            <div class="mb-3">
+                                <label for="calon3" class="col-form-label">Suara (3) <?= $row['calon_3']; ?></label>
+                                <input type="number" name="calon3" class="form-control" placeholder="Masukan jumlah suara (3) <?= $row['calon_3']; ?>"
+                                    value="<?= $row['calon3']; ?>">                                
+                            </div> 
+                        <?php endif; ?>
+                        <?php if ($row['calon_4'] != '') : ?>
+                            <div class="mb-3">
+                                <label for="calon4" class="col-form-label">Suara (4) <?= $row['calon_4']; ?></label>
+                                <input type="number" name="calon4" class="form-control" placeholder="Masukan jumlah suara (4) <?= $row['calon_4']; ?>"
+                                    value="<?= $row['calon4']; ?>">                            
+                            </div> 
+                        <?php endif; ?>
+                        <?php if ($row['calon_5'] != '') : ?>
+                            <div class="mb-3">
+                                <label for="calon5" class="col-form-label">Suara (5) <?= $row['calon_5']; ?></label>
+                                <input type="number" name="calon5" class="form-control" placeholder="Masukan jumlah suara (5) <?= $row['calon_5']; ?>"
+                                    value="<?= $row['calon5']; ?>">                            
+                            </div>                    
+                        <?php endif; ?>                        
                 </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -358,34 +358,16 @@ class Home extends BaseController
                     'required' => 'Kolom Suara Tidak Sah tidak boleh kosong'
                 ],
             ],
-            'calon_1' => [
+            'calon1' => [
                 'rules'  => 'required',
                 'errors' => [
                     'required' => 'Kolom Suara Calon 1 tidak boleh kosong'
                 ],
             ],
-            'calon_2' => [
+            'calon2' => [
                 'rules'  => 'required',
                 'errors' => [
                     'required' => 'Kolom Suara Calon 2 tidak boleh kosong'
-                ],
-            ],
-            'calon_3' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Kolom Suara Calon 3 tidak boleh kosong'
-                ],
-            ],
-            'calon_4' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Kolom Suara Calon 4 tidak boleh kosong'
-                ],
-            ],
-            'calon_5' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Kolom Suara Calon 5 tidak boleh kosong'
                 ],
             ],
         ]);
@@ -400,11 +382,11 @@ class Home extends BaseController
             'mgn_hak_suara'     => $this->request->getPost('mgn_hak_suara'),
             'tdk_mgn_hak_suara' => $this->request->getPost('tdk_mgn_hak_suara'),
             'suara_tdk_sah'     => $this->request->getPost('suara_tdk_sah'),
-            'calon_1'           => $this->request->getPost('calon_1'),
-            'calon_2'           => $this->request->getPost('calon_2'),
-            'calon_3'           => $this->request->getPost('calon_3'),
-            'calon_4'           => $this->request->getPost('calon_4'),
-            'calon_5'           => $this->request->getPost('calon_5'),
+            'calon1'            => $this->request->getPost('calon1'),
+            'calon2'            => $this->request->getPost('calon2'),
+            'calon3'            => $this->request->getPost('calon3'),
+            'calon4'            => $this->request->getPost('calon4'),
+            'calon5'            => $this->request->getPost('calon5'),
             'desa'              => $session->get('desa'),
         ];
 
@@ -416,5 +398,80 @@ class Home extends BaseController
         } else {
             return redirect()->back()->withInput();
         }
+    }
+
+    public function edit_data_tps()
+    {
+        $session = session();
+
+        $validate = $this->validate([
+            'banjar_tps' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Kolom Banjar TPS tidak boleh kosong'
+                ],
+            ],
+            'jml_pml_tetap' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Kolom Jumlah Pemilih Tetap tidak boleh kosong'
+                ],
+            ],
+            'mgn_hak_suara' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Kolom Jumlah yang menggunakan hak suara tidak boleh kosong'
+                ],
+            ],
+            'tdk_mgn_hak_suara' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Kolom Jumlah yang tidak menggunakan hak suara tidak boleh kosong'
+                ],
+            ],
+            'suara_tdk_sah' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Kolom Suara Tidak Sah tidak boleh kosong'
+                ],
+            ],
+            'calon1' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Kolom Suara Calon 1 tidak boleh kosong'
+                ],
+            ],
+            'calon2' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Kolom Suara Calon 2 tidak boleh kosong'
+                ],
+            ],
+        ]);
+
+        if (!$validate) {
+            return redirect()->back()->withInput();
+        }
+
+        $id = $this->request->getPost('id_tps');
+
+        $data = [
+            'banjar_tps'        => $this->request->getPost('banjar_tps'),
+            'jml_pml_tetap'     => $this->request->getPost('jml_pml_tetap'),
+            'mgn_hak_suara'     => $this->request->getPost('mgn_hak_suara'),
+            'tdk_mgn_hak_suara' => $this->request->getPost('tdk_mgn_hak_suara'),
+            'suara_tdk_sah'     => $this->request->getPost('suara_tdk_sah'),
+            'calon1'            => $this->request->getPost('calon1'),
+            'calon2'            => $this->request->getPost('calon2'),
+            'calon3'            => $this->request->getPost('calon3'),
+            'calon4'            => $this->request->getPost('calon4'),
+            'calon5'            => $this->request->getPost('calon5'),
+            'desa'              => $session->get('desa'),
+        ];
+
+        $model = new tps();
+        $model->update($id, $data);        
+        $session->setFlashData('title', 'Data TPS berhasil diubah');
+        return redirect()->to(base_url('Home/tabel_tps/'.$session->get('desa'))); 
     }
 }
