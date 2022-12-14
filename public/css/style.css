@@ -1,0 +1,42 @@
+.tengah {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn {
+    border:1px solid #FFFFFF;
+    border-radius:5px;
+    padding:10px 30px;				
+    background-color:#7C3E39;
+    color:#000000;
+    text-decoration: none;
+    font-weight:normal;
+    opacity:1;
+    transition:1s;	
+    background: transparent;		
+    }
+    
+.btn:hover{
+    background: transparent;
+    -webkit-box-shadow: 10px 10px 99px 6px rgba(255, 255, 255, 0.8);
+    -moz-box-shadow: 10px 10px 99px 6px rgba(255, 255, 255, 0.8);
+    box-shadow: 10px 10px 99px 6px rgba(255, 255, 255, 0.8);			
+}
+
+.text-dpmd {
+    font-size: 1.5em;
+    color: #CECECD;
+}
+
+@media only screen and (max-device-width: 480px) {
+    html {
+        background: url(bg.png);
+        background-size: cover;        
+        height: 100%;
+        font-size: 1em;
+        color: white;
+    }
+}
+
