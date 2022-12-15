@@ -5,13 +5,14 @@ namespace App\Controllers;
 use App\Models\akun;
 use App\Models\desa;
 use App\Models\tps;
+use PhpParser\Node\Expr\Print_;
 
 class Home extends BaseController
 {
 
     public function __construct()
     {
-        $this->userModel = new \App\Models\akun();        
+        $this->userModel = new \App\Models\akun();                       
         $this->modelDesa = new \App\Models\desa();        
         $this->tpsModel = new \App\Models\tps();        
     }
@@ -71,7 +72,7 @@ class Home extends BaseController
                 return redirect()->back()->withInput();
             }            
             $tps = new tps();        
-            $data['tps'] = $tps->getTPS($id);                     
+            $data['tps'] = $tps->getTPS($id);                                           
             return view('tabel_tps', $data);
         } else {
             session()->setFlashData('icon', 'warning');
@@ -127,13 +128,25 @@ class Home extends BaseController
         $post = $this->request->getPost();
         $query = $this->userModel->table('akun')->getWhere(['username' => $post['username']]);        
         $user = $query->getRow();
+        $query2 = $this->modelDesa->table('desa')->getWhere(['id_desa' => $user->desa]);
+        $user2 = $query2->getRow();
         if ($user) {
             if (password_verify($post['password'], $user->password)) {
-                if ($user->status == 'aktif') {                                       
+                if ($user->status == 'aktif') { 
+                    $desa = '';
+                    $nama_desa = '';
+                    if ($user->desa == null) {
+                        $desa;
+                        $nama_desa;
+                    } else {
+                        $desa = $user->desa;
+                        $nama_desa = $user2->nama_desa;
+                    }                        
                     $params = [
                         'nama_depan' => $user->nama_depan,                        
                         'nama_belakang' => $user->nama_belakang,
-                        'desa' => $user->desa,                       
+                        'desa' => $desa,
+                        'nama_desa' => $nama_desa,
                         'logged_in' => true,
                     ];
                     session()->set($params);                    

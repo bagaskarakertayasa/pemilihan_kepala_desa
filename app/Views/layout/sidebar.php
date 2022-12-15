@@ -14,7 +14,7 @@
         <?php if (session()->get('desa') != null) : ?>
             <a class="nav-link" href="<?= base_url('Home/tabel_tps') ?>/<?= session()->get('desa') ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                TPS
+                TPS <?= session()->get('nama_desa') ?>
             </a>
         <?php endif ?> 
         <?php if (session()->get('desa') != null) : ?>
