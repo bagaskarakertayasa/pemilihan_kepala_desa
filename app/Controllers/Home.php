@@ -5,13 +5,15 @@ namespace App\Controllers;
 use App\Models\akun;
 use App\Models\desa;
 use App\Models\tps;
-use PhpParser\Node\Expr\Print_;
 
 class Home extends BaseController
 {
+    private $db;
 
     public function __construct()
     {
+        $this->db = db_connect();
+
         $this->userModel = new \App\Models\akun();                       
         $this->modelDesa = new \App\Models\desa();        
         $this->tpsModel = new \App\Models\tps();        
@@ -71,9 +73,25 @@ class Home extends BaseController
                 session()->setFlashData('text', 'Maaf, anda tidak boleh mengakses halaman tersebut');
                 return redirect()->back()->withInput();
             }            
+
+            $session =session();
             $tps = new tps();        
-            $data['tps'] = $tps->getTPS($id);                                           
-            return view('tabel_tps', $data);
+            $data['tps'] = $tps->getTPS($id);
+            $data2 = $tps->getTPS($id);
+        
+            foreach ($data2 as $key) {
+                if (empty($key['calon_1'] && $key['calon_2'])) {
+                    $session->setFlashData('icon', 'warning');
+                    $session->setFlashData('title', 'Data Calon Perbekel Kosong');
+                    $session->setFlashData('text', 'Maaf, diharapkan untuk mengisi data calon perbekel terlebih dahulu');
+                    return redirect()->back()->withInput();
+                } else {
+                    return view('tabel_tps', $data);
+                }
+            }            
+            
+            // echo "<pre>";
+            // print_r($data);
         } else {
             session()->setFlashData('icon', 'warning');
             session()->setFlashData('title', 'Login');
@@ -342,50 +360,76 @@ class Home extends BaseController
 
         $validate = $this->validate([
             'banjar_tps' => [
-                'rules'  => 'required',
+                'rules'  => 'required|alpha_space',
                 'errors' => [
-                    'required' => 'Kolom Banjar TPS tidak boleh kosong'
+                    'required' => 'Kolom Banjar TPS tidak boleh kosong',
+                    'required' => 'Nama Banjar TPS tidak boleh menggunakan karakter selain huruf dan spasi',
                 ],
             ],
             'jml_pml_tetap' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Jumlah Pemilih Tetap tidak boleh kosong'
+                    'required' => 'Kolom Jumlah Pemilih Tetap tidak boleh kosong',
+                    'is_natural' => 'Jumlah Pemilih Tetap tidak boleh menggunakan angka minus',
                 ],
             ],
             'mgn_hak_suara' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Jumlah yang menggunakan hak suara tidak boleh kosong'
+                    'required' => 'Kolom Jumlah yang menggunakan hak suara tidak boleh kosong',
+                    'is_natural' => 'Jumlah yang menggunakan hak suara tidak boleh menggunakan angka minus',
                 ],
             ],
             'tdk_mgn_hak_suara' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Jumlah yang tidak menggunakan hak suara tidak boleh kosong'
+                    'required' => 'Kolom Jumlah yang tidak menggunakan hak suara tidak boleh kosong',
+                    'is_natural' => 'Jumlah yang tidak menggunakan hak suara tidak boleh menggunakan angka minus',
                 ],
             ],
             'suara_tdk_sah' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Suara Tidak Sah tidak boleh kosong'
+                    'required' => 'Kolom Suara Tidak Sah tidak boleh kosong',
+                    'is_natural' => 'Jumlah Suara Tidak Sah tidak boleh menggunakan angka minus',
                 ],
             ],
             'calon1' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Suara Calon 1 tidak boleh kosong'
+                    'required' => 'Kolom Suara Calon 1 tidak boleh kosong',
+                    'is_natural' => 'Jumlah Suara Calon 1 tidak boleh menggunakan angka minus',
                 ],
             ],
             'calon2' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Suara Calon 2 tidak boleh kosong'
+                    'required' => 'Kolom Suara Calon 2 tidak boleh kosong',
+                    'is_natural' => 'Jumlah Suara Calon 2 tidak boleh menggunakan angka minus',
+                ],
+            ],
+            'calon3' => [
+                'rules'  => 'is_natural|permit_empty',
+                'errors' => [                    
+                    'is_natural' => 'Jumlah Suara Calon 2 tidak boleh menggunakan angka minus',
+                ],
+            ],
+            'calon4' => [
+                'rules'  => 'is_natural|permit_empty',
+                'errors' => [                    
+                    'is_natural' => 'Jumlah Suara Calon 2 tidak boleh menggunakan angka minus',
+                ],
+            ],
+            'calon5' => [
+                'rules'  => 'is_natural|permit_empty',
+                'errors' => [                    
+                    'is_natural' => 'Jumlah Suara Calon 5 tidak boleh menggunakan angka minus',
                 ],
             ],
         ]);
 
         if (!$validate) {
+            session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
         

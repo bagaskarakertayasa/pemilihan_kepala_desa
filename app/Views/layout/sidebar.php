@@ -10,19 +10,19 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-user-circle"></i></div>
                 Akun
             </a>
-        <?php endif ?>        
-        <?php if (session()->get('desa') != null) : ?>
-            <a class="nav-link" href="<?= base_url('Home/tabel_tps') ?>/<?= session()->get('desa') ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                TPS <?= session()->get('nama_desa') ?>
-            </a>
         <?php endif ?> 
         <?php if (session()->get('desa') != null) : ?>
             <a class="nav-link" href="<?= base_url('Home/calon') ?>/<?= session()->get('desa') ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
                 Calon Perbekel 
             </a>
-        <?php endif ?> 
+        <?php endif ?>        
+        <?php if (session()->get('desa') != null) : ?>
+            <a class="nav-link" href="<?= base_url('Home/tabel_tps') ?>/<?= session()->get('desa') ?>">
+                <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
+                TPS Desa <?= session()->get('nama_desa') ?>
+            </a>
+        <?php endif ?>         
         <div class="sb-sidenav-menu-heading">Interface</div>                
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
             aria-expanded="false" aria-controls="collapseLayouts">

@@ -647,7 +647,7 @@
                     </div>                    
                 </div>
             </div>
-        </div>
+        </div>        
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<?= base_url('js/scripts.js') ?>"></script>
@@ -656,5 +656,16 @@
         <script src="<?= base_url('assets/demo/chart-bar-demo.js') ?>"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="<?= base_url('js/datatables-simple-demo.js') ?>"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            <?php if (session()->getFlashdata('icon')) { ?>
+                Swal.fire({
+                    icon: '<?php echo session()->getFlashdata('icon') ?>',
+                    title: '<?php echo session()->getFlashdata('title') ?>',
+                    text: '<?php echo session()->getFlashdata('text') ?>'
+                })
+            <?php } ?>
+        </script>
     </body>
 </html>

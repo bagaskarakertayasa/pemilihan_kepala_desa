@@ -79,27 +79,19 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4 mb-3">TPS Desa <?= session()->get('nama_desa') ?></h1>
                     <?php $validation = \Config\Services::validation(); ?>
-                    <?php if (empty($validation->listErrors())) : ?>
-                        <div class="alert alert-warning" role="alert">                        
-                            <?= $validation->listErrors() ?>
+                    <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">                        
+                            <h4>Harap perhatikan ketentuan di bawah</h4>
+                            <?php echo session()->getFlashdata('error') ?>
                         </div>
                     <?php endif; ?>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                                Tabel daftar TPS Desa <?= session()->get('nama_desa') ?>
-                            <?php foreach ($tps as $row) : ?>
-                            <button type="button" class="tbh_tps btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah_tps"
-                                <?= $row['calon1'] == '' ? 'hidden' : null ?>>
+                                Tabel daftar TPS Desa <?= session()->get('nama_desa') ?>                                                      
+                            <button type="button" class="tbh_tps btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah_tps">
                                 Tambah Data
-                            </button>
-                            <?php break; ?>
-                            <?php endforeach; ?>                            
-                            <button type="button" class="tbh_tps btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah_tps_1"
-                                <?php !empty($tps) ? 'hidden' : null ?>
-                                <?php foreach ($tps as $row): ?><?= $row['id_tps'] != '' ? 'hidden' : null; ?><?php endforeach; ?>>
-                                Tambah Data
-                            </button>                                                                                   
+                            </button>  
                         </div>                        
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -130,8 +122,9 @@
                                 <tbody>
                                     <?php $no = 1; ?>
                                     <?php foreach ($tps as $row) : ?>
-                                        <tr>
-                                            <td><?= $no++; ?> TPS BR. <?= $row['banjar_tps']; ?></td>                                            
+                                        <?php if ($row['id_tps'] != '') : ?>
+                                        <tr>                                            
+                                            <td><?= $no++; ?> TPS BR. <?= $row['banjar_tps']; ?></td>
                                             <td><?= $row['jml_pml_tetap'] ?></td>
                                             <td><?= $row['mgn_hak_suara'] ?></td>
                                             <td><?= $row['tdk_mgn_hak_suara'] ?></td>
@@ -153,6 +146,7 @@
                                                 </button>
                                             </td>
                                         </tr>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -190,69 +184,6 @@
         </div>
     </div>
 
-    <!-- modal untuk tambah tps pertama kali -->
-    <div class="modal fade" id="tambah_tps_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data TPS</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">  
-                <div class="alert alert-warning" role="alert">
-                    Perhatian! untuk kolom calon 3, 4, dan 5 harap dikosongkan apabila <strong>Desa <?= session()->get('nama_desa') ?></strong> tidak memiliki calon 3, 4, dan 5.
-                </div>     
-                <form action="<?= base_url('Home/proses_tambah_tps') ?>" method="post">
-                    <div class="mb-3">
-                        <label for="banjar_tps" class="col-form-label">Banjar TPS</label>
-                        <input type="text" name="banjar_tps" class="form-control" placeholder="Masukan Banjar TPS">
-                    </div>
-                    <div class="mb-3">
-                        <label for="jml_pml_tetap" class="col-form-label">Jumlah Pemilih Tetap</label>
-                        <input type="number" name="jml_pml_tetap" class="form-control" placeholder="Masukan Jumlah Pemilih Tetap">
-                    </div>
-                    <div class="mb-3">
-                        <label for="mgn_hak_suara" class="col-form-label">Jumlah Yang Menggunakan Hak Suara</label>
-                        <input type="number" name="mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang menggunakan hak suara">
-                    </div>
-                    <div class="mb-3">
-                        <label for="tdk_mgn_hak_suara" class="col-form-label">Jumlah Yang Tidak Menggunakan Hak Suara</label>
-                        <input type="number" name="tdk_mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang tidak menggunakan hak suara">
-                    </div>
-                    <div class="mb-3">
-                        <label for="suara_tdk_sah" class="col-form-label">Suara Tidak Sah</label>
-                        <input type="number" name="suara_tdk_sah" class="form-control" placeholder="Masukan jumlah suara tidak sah">
-                    </div>                                            
-                    <div class="mb-3">
-                        <label for="calon_1" class="col-form-label">Calon 1</label>
-                        <input type="number" name="calon1" class="form-control" placeholder="Masukan jumlah calon 1">
-                    </div>                                
-                    <div class="mb-3">
-                        <label for="calon_2" class="col-form-label">Calon 2</label>
-                        <input type="number" name="calon2" class="form-control" placeholder="Masukan jumlah calon 2">
-                    </div>                                                                     
-                    <div class="mb-3">
-                        <label for="calon_3" class="col-form-label">Calon 3</label>
-                        <input type="number" name="calon3" class="form-control" placeholder="Masukan jumlah calon 3">
-                    </div> 
-                    <div class="mb-3">
-                        <label for="calon_4" class="col-form-label">Calon 4</label>
-                        <input type="number" name="calon4" class="form-control" placeholder="Masukan jumlah calon 4">                                
-                    </div> 
-                    <div class="mb-3">
-                        <label for="calon_5" class="col-form-label">Calon 5</label>
-                        <input type="number" name="calon5" class="form-control" placeholder="Masukan jumlah calon 5">                        
-                    </div> 
-            </div>
-                <div class="modal-footer">
-                    <button type="reset" class="btn btn-danger">Reset</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                </div>    
-            </form>          
-        </div>
-    </div>
-</div>
-
     <!-- modal untuk tambah tps -->
     <div class="modal fade" id="tambah_tps" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -263,51 +194,52 @@
             </div>
             <div class="modal-body">                    
                 <form action="<?= base_url('Home/proses_tambah_tps') ?>" method="post">
+                    <?= csrf_field() ?>
                     <div class="mb-3">
                         <label for="banjar_tps" class="col-form-label">Banjar TPS</label>
-                        <input type="text" name="banjar_tps" class="form-control" placeholder="Masukan Banjar TPS">
+                        <input type="text" name="banjar_tps" value="<?= old('banjar_tps') ?>" class="form-control" placeholder="Masukan Banjar TPS">
                     </div>
                     <div class="mb-3">
                         <label for="jml_pml_tetap" class="col-form-label">Jumlah Pemilih Tetap</label>
-                        <input type="number" name="jml_pml_tetap" class="form-control" placeholder="Masukan Jumlah Pemilih Tetap">
+                        <input type="number" name="jml_pml_tetap" value="<?= old('jml_pml_tetap') ?>" class="form-control" placeholder="Masukan Jumlah Pemilih Tetap">
                     </div>
                     <div class="mb-3">
                         <label for="mgn_hak_suara" class="col-form-label">Jumlah Yang Menggunakan Hak Suara</label>
-                        <input type="number" name="mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang menggunakan hak suara">
+                        <input type="number" name="mgn_hak_suara" value="<?= old('mgn_hak_suara') ?>" class="form-control" placeholder="Masukan jumlah yang menggunakan hak suara">
                     </div>
                     <div class="mb-3">
                         <label for="tdk_mgn_hak_suara" class="col-form-label">Jumlah Yang Tidak Menggunakan Hak Suara</label>
-                        <input type="number" name="tdk_mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang tidak menggunakan hak suara">
+                        <input type="number" name="tdk_mgn_hak_suara" value="<?= old('tdk_mgn_hak_suara') ?>" class="form-control" placeholder="Masukan jumlah yang tidak menggunakan hak suara">
                     </div>
                     <div class="mb-3">
                         <label for="suara_tdk_sah" class="col-form-label">Suara Tidak Sah</label>
-                        <input type="number" name="suara_tdk_sah" class="form-control" placeholder="Masukan jumlah suara tidak sah">
+                        <input type="number" name="suara_tdk_sah" value="<?= old('suara_tdk_sah') ?>" class="form-control" placeholder="Masukan jumlah suara tidak sah">
                     </div> 
                     <?php foreach ($tps as $row) : ?>                        
                     <div class="mb-3">
                         <label for="calon_1" class="col-form-label">Suara (1) <?= $row['calon_1']; ?></label>
-                        <input type="number" name="calon1" class="form-control" placeholder="Masukan jumlah suara (1) <?= $row['calon_1']; ?>">
+                        <input type="number" name="calon1" value="<?= old('calon1') ?>" class="form-control" placeholder="Masukan jumlah suara (1) <?= $row['calon_1']; ?>">
                     </div>                                
                     <div class="mb-3">
                         <label for="calon_2" class="col-form-label">Suara (2) <?= $row['calon_2']; ?></label>
-                        <input type="number" name="calon2" class="form-control" placeholder="Masukan jumlah suara (2) <?= $row['calon_2']; ?>">
+                        <input type="number" name="calon2" value="<?= old('calon2') ?>" class="form-control" placeholder="Masukan jumlah suara (2) <?= $row['calon_2']; ?>">
                     </div>                                             
                         <?php if ($row['calon_3'] != '') : ?>
                             <div class="mb-3">
                                 <label for="calon_3" class="col-form-label">Suara (3) <?= $row['calon_3']; ?></label>
-                                <input type="number" name="calon3" class="form-control" placeholder="Masukan jumlah suara (3) <?= $row['calon_3']; ?>">
+                                <input type="number" name="calon3" value="<?= old('calon3') ?>" class="form-control" placeholder="Masukan jumlah suara (3) <?= $row['calon_3']; ?>">
                             </div> 
                     <?php endif; ?>
                         <?php if ($row['calon_4'] != '') : ?>
                             <div class="mb-3">
                                 <label for="calon_4" class="col-form-label">Suara (4) <?= $row['calon_4']; ?></label>
-                                <input type="number" name="calon4" class="form-control" placeholder="Masukan jumlah suara (4) <?= $row['calon_4']; ?>">                                
+                                <input type="number" name="calon4" value="<?= old('calon4') ?>" class="form-control" placeholder="Masukan jumlah suara (4) <?= $row['calon_4']; ?>">                                
                             </div> 
                     <?php endif; ?>
                     <?php if ($row['calon_5'] != '') : ?>
                     <div class="mb-3">
                         <label for="calon_5" class="col-form-label">Suara (5) <?= $row['calon_5']; ?></label>
-                        <input type="number" name="calon5" class="form-control" placeholder="Masukan jumlah suara (5) <?= $row['calon_5']; ?>">                        
+                        <input type="number" name="calon5" value="<?= old('calon5') ?>" class="form-control" placeholder="Masukan jumlah suara (5) <?= $row['calon_5']; ?>">                        
                     </div> 
                     <?php endif; ?>
                     <?php break; ?>
