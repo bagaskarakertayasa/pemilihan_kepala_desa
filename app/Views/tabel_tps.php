@@ -266,61 +266,62 @@
                 </div>
                 <div class="modal-body">
                     <form action="<?= base_url('Home/edit_data_tps') ?>" method="post">
+                        <?= csrf_field() ?>
                         <input type="text" value="<?= $row['id_tps']; ?>" name="id_tps" hidden>
                         <div class="mb-3">
                             <label for="banjar_tps" class="col-form-label">Banjar TPS</label>
                             <input type="text" name="banjar_tps" class="form-control" placeholder="Masukan Banjar TPS"
-                                value="<?= $row['banjar_tps']; ?>">
+                                value="<?= old('banjar_tps', $row['banjar_tps']); ?>">
                         </div>
                         <div class="mb-3">
                             <label for="jml_pml_tetap" class="col-form-label">Jumlah Pemilih Tetap</label>
                             <input type="number" name="jml_pml_tetap" class="form-control" placeholder="Masukan jumlah suara pemilih tetap"
-                                value="<?= $row['jml_pml_tetap']; ?>">
+                                value="<?= old('jml_pml_tetap', $row['jml_pml_tetap']); ?>">
                         </div>
                         <div class="mb-3">
                             <label for="mgn_hak_suara" class="col-form-label">Jumah Yang Menggunakan Hak Suara</label>
                             <input type="number" name="mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang menggunakan hak suara"
-                                value="<?= $row['mgn_hak_suara']; ?>">
+                                value="<?= old('mgn_hak_suara', $row['mgn_hak_suara']); ?>">
                         </div>
                         <div class="mb-3">
                             <label for="tdk_mgn_hak_suara" class="col-form-label">Tidak Menggunakan Hak Suara</label>
                             <input type="number" name="tdk_mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang tidak menggunakan hak suara"
-                                value="<?= $row['tdk_mgn_hak_suara']; ?>">
+                                value="<?= old('tdk_mgn_hak_suara', $row['tdk_mgn_hak_suara']); ?>">
                         </div> 
                         <div class="mb-3">
                             <label for="suara_tdk_sah" class="col-form-label">Suara Tidak Sah</label>
                             <input type="number" name="suara_tdk_sah" class="form-control" placeholder="Masukan jumlah suara tidak sah"
-                                value="<?= $row['suara_tdk_sah']; ?>">
+                                value="<?= old('suara_tdk_sah', $row['suara_tdk_sah']); ?>">
                         </div> 
                         <div class="mb-3">
                             <label for="calon1" class="col-form-label">Suara (1) <?= $row['calon_1']; ?></label>
                             <input type="number" name="calon1" class="form-control" placeholder="Masukan jumlah suara (1) <?= $row['calon_1']; ?>"
-                                value="<?= $row['calon1']; ?>">
+                                value="<?= old('calon1', $row['calon1']); ?>">
                         </div> 
                         <div class="mb-3">
                             <label for="calon2" class="col-form-label">Suara (2) <?= $row['calon_2']; ?></label>
                             <input type="number" name="calon2" class="form-control" placeholder="Masukan jumlah suara (2) <?= $row['calon_2']; ?>"
-                                value="<?= $row['calon2']; ?>">
+                                value="<?= old('calon2', $row['calon2']); ?>">
                         </div> 
                         <?php if ($row['calon_3'] != '') : ?>
                             <div class="mb-3">
                                 <label for="calon3" class="col-form-label">Suara (3) <?= $row['calon_3']; ?></label>
                                 <input type="number" name="calon3" class="form-control" placeholder="Masukan jumlah suara (3) <?= $row['calon_3']; ?>"
-                                    value="<?= $row['calon3']; ?>">                                
+                                    value="<?= old('calon3', $row['calon3']); ?>">                                
                             </div> 
                         <?php endif; ?>
                         <?php if ($row['calon_4'] != '') : ?>
                             <div class="mb-3">
                                 <label for="calon4" class="col-form-label">Suara (4) <?= $row['calon_4']; ?></label>
                                 <input type="number" name="calon4" class="form-control" placeholder="Masukan jumlah suara (4) <?= $row['calon_4']; ?>"
-                                    value="<?= $row['calon4']; ?>">                            
+                                    value="<?= old('calon4', $row['calon4']); ?>">                            
                             </div> 
                         <?php endif; ?>
                         <?php if ($row['calon_5'] != '') : ?>
                             <div class="mb-3">
                                 <label for="calon5" class="col-form-label">Suara (5) <?= $row['calon_5']; ?></label>
                                 <input type="number" name="calon5" class="form-control" placeholder="Masukan jumlah suara (5) <?= $row['calon_5']; ?>"
-                                    value="<?= $row['calon5']; ?>">                            
+                                    value="<?= old('calon5', $row['calon5']); ?>">                            
                             </div>                    
                         <?php endif; ?>                        
                 </div>

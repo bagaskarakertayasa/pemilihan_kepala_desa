@@ -33,9 +33,12 @@ class akun extends Model
          ->join('desa', 'desa.id_desa = akun.desa')             
          ->get()->getResultArray();
 
-        // return $this->db->table('akun')
-        //  ->join('desa', 'desa.id_desa = akun.desa', 'right')           
-        //  ->get()->getResultArray();
+        // $hasil = $this->db->query("SELECT akun.id_akun, akun.nama_depan,
+        //     akun.nama_belakang, akun.username, akun.email, akun.desa,
+        //     akun.status, desa.id_desa, desa.nama_desa 
+        //     FROM desa
+        //     LEFT JOIN akun ON id_desa = desa");
+        // return $hasil->getResultArray();
     }
 }
 

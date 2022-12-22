@@ -107,7 +107,7 @@ class Home extends BaseController
                 session()->setFlashData('icon', 'warning');
                 session()->setFlashData('title', 'Tidak ada akses');
                 session()->setFlashData('text', 'Maaf, anda tidak boleh mengakses halaman tersebut');
-                return redirect()->back()->withInput();
+                return redirect()->back()->withInput();                
             }
             $desa = new desa();        
             $data['desa'] = $desa->getDesa($id);                     
@@ -463,50 +463,76 @@ class Home extends BaseController
 
         $validate = $this->validate([
             'banjar_tps' => [
-                'rules'  => 'required',
+                'rules'  => 'required|alpha_space',
                 'errors' => [
-                    'required' => 'Kolom Banjar TPS tidak boleh kosong'
+                    'required' => 'Kolom Banjar TPS tidak boleh kosong',
+                    'required' => 'Nama Banjar TPS tidak boleh menggunakan karakter selain huruf dan spasi',
                 ],
             ],
             'jml_pml_tetap' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Jumlah Pemilih Tetap tidak boleh kosong'
+                    'required' => 'Kolom Jumlah Pemilih Tetap tidak boleh kosong',
+                    'is_natural' => 'Jumlah Pemilih Tetap tidak boleh menggunakan angka minus',
                 ],
             ],
             'mgn_hak_suara' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Jumlah yang menggunakan hak suara tidak boleh kosong'
+                    'required' => 'Kolom Jumlah yang menggunakan hak suara tidak boleh kosong',
+                    'is_natural' => 'Jumlah yang menggunakan hak suara tidak boleh menggunakan angka minus',
                 ],
             ],
             'tdk_mgn_hak_suara' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Jumlah yang tidak menggunakan hak suara tidak boleh kosong'
+                    'required' => 'Kolom Jumlah yang tidak menggunakan hak suara tidak boleh kosong',
+                    'is_natural' => 'Jumlah yang tidak menggunakan hak suara tidak boleh menggunakan angka minus',
                 ],
             ],
             'suara_tdk_sah' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Suara Tidak Sah tidak boleh kosong'
+                    'required' => 'Kolom Suara Tidak Sah tidak boleh kosong',
+                    'is_natural' => 'Jumlah Suara Tidak Sah tidak boleh menggunakan angka minus',
                 ],
             ],
             'calon1' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Suara Calon 1 tidak boleh kosong'
+                    'required' => 'Kolom Suara Calon 1 tidak boleh kosong',
+                    'is_natural' => 'Jumlah Suara Calon 1 tidak boleh menggunakan angka minus',
                 ],
             ],
             'calon2' => [
-                'rules'  => 'required',
+                'rules'  => 'required|is_natural',
                 'errors' => [
-                    'required' => 'Kolom Suara Calon 2 tidak boleh kosong'
+                    'required' => 'Kolom Suara Calon 2 tidak boleh kosong',
+                    'is_natural' => 'Jumlah Suara Calon 2 tidak boleh menggunakan angka minus',
+                ],
+            ],
+            'calon3' => [
+                'rules'  => 'is_natural|permit_empty',
+                'errors' => [                    
+                    'is_natural' => 'Jumlah Suara Calon 2 tidak boleh menggunakan angka minus',
+                ],
+            ],
+            'calon4' => [
+                'rules'  => 'is_natural|permit_empty',
+                'errors' => [                    
+                    'is_natural' => 'Jumlah Suara Calon 2 tidak boleh menggunakan angka minus',
+                ],
+            ],
+            'calon5' => [
+                'rules'  => 'is_natural|permit_empty',
+                'errors' => [                    
+                    'is_natural' => 'Jumlah Suara Calon 5 tidak boleh menggunakan angka minus',
                 ],
             ],
         ]);
 
         if (!$validate) {
+            session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
 
@@ -530,5 +556,149 @@ class Home extends BaseController
         $model->update($id, $data);        
         $session->setFlashData('title', 'Data TPS berhasil diubah');
         return redirect()->to(base_url('Home/tabel_tps/'.$session->get('desa'))); 
+    }
+
+    public function proses_tambah_calon()
+    {
+        $session = session();
+
+        $validate = $this->validate([
+            'calon_1' => [
+                'rules'  => 'required|alpha_space',
+                'errors' => [
+                    'required' => 'Kolom Calon Pertama tidak boleh kosong',
+                    'alpha_space' => 'Nama Calon Pertama tidak boleh menggunakan karakter selain huruf dan spasi',
+                ],
+            ],
+            'calon_2' => [
+                'rules'  => 'required|alpha_space',
+                'errors' => [
+                    'required' => 'Kolom Calon Kedua tidak boleh kosong',
+                    'alpha_space' => 'Nama Calon Kedua tidak boleh menggunakan karakter selain huruf dan spasi',
+                ],
+            ],
+            'calon_3' => [
+                'rules'  => 'alpha_space|permit_empty',
+                'errors' => [
+                    'required' => 'Kolom Calon Ketiga tidak boleh kosong'        
+                ],
+            ],
+            'calon_4' => [
+                'rules'  => 'alpha_space|permit_empty',
+                'errors' => [
+                    'required' => 'Kolom Calon Keempat tidak boleh kosong',        
+                ],
+            ],
+            'calon_5' => [
+                'rules'  => 'alpha_space|permit_empty',
+                'errors' => [
+                    'required' => 'Kolom Calon Kelima tidak boleh kosong',        
+                ],
+            ],
+        ]);
+
+        if (!$validate) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $validated = $this->validate([
+			'gambar_calon_1' => 'mime_in[gambar_calon_1,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_1,2048]',
+			'gambar_calon_2' => 'mime_in[gambar_calon_2,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_2,2048]',
+		]);
+
+		if ($validated == FALSE) {			
+			$session->setFlashData('error', 'Pastikan format gambar sesuai dengan ketentuan');
+			return redirect()->back()->withInput();
+		} else {
+            $id = $session->get('desa');     
+            $calon3 = '';        
+            $calon4 = '';        
+            $calon5 = '';                  
+
+            //foto calon 1
+            $gambar_calon_1 = $this->request->getFile('gambar_calon_1');
+            $gambar_1 = $gambar_calon_1->getRandomName();
+            $foto_calon_1 = "IMG_" . $gambar_1;
+            $gambar_calon_1->move(ROOTPATH . 'public/upload', $foto_calon_1);        
+            
+            //foto calon 2
+            $gambar_calon_2 = $this->request->getFile('gambar_calon_2');
+            $gambar_2 = $gambar_calon_2->getRandomName();
+            $foto_calon_2 = "IMG_" . $gambar_2;
+            $gambar_calon_2->move(ROOTPATH . 'public/upload', $foto_calon_2);        
+            
+            //foto calon 3
+            $gambar_calon_3 = $this->request->getFile('gambar_calon_3');
+            if ($gambar_calon_3 == '') {
+                $calon3;
+            } else {
+                $gambar_3 = $gambar_calon_3->getRandomName();
+                $foto_calon_3 = "IMG_" . $gambar_3;
+                $gambar_calon_3->move(ROOTPATH . 'public/upload', $foto_calon_3);
+                $calon3 = $foto_calon_3;
+            }        
+
+            //foto calon 4
+            $gambar_calon_4 = $this->request->getFile('gambar_calon_4');            
+            if ($gambar_calon_4 == '') {                
+                $calon4;
+            } else {                
+                $gambar_4 = $gambar_calon_4->getRandomName();
+			    $foto_calon_4 = "IMG_" . $gambar_4;
+			    $gambar_calon_4->move(ROOTPATH . 'public/upload', $foto_calon_4);
+                $calon4 = $foto_calon_4;
+            };       
+
+            //foto calon 5
+            $gambar_calon_5 = $this->request->getFile('gambar_calon_5');
+            if ($gambar_calon_5 == '') {
+                $calon5;
+            } else {
+                $gambar_5 = $gambar_calon_5->getRandomName();
+                $foto_calon_5 = "IMG_" . $gambar_5;
+                $gambar_calon_5->move(ROOTPATH . 'public/upload', $foto_calon_5);
+                $calon5 = $foto_calon_5;
+            };
+            
+            $data = [
+                'calon_1' => $this->request->getPost('calon_1'),
+                'calon_2' => $this->request->getPost('calon_2'),
+                'calon_3' => $this->request->getPost('calon_3'),
+                'calon_4' => $this->request->getPost('calon_4'),
+                'calon_5' => $this->request->getPost('calon_5'),
+                'gambar_calon_1' => $foto_calon_1,                                
+                'gambar_calon_2' => $foto_calon_2,                                
+                'gambar_calon_3' => $calon3,                                
+                'gambar_calon_4' => $calon4,                                
+                'gambar_calon_5' => $calon5,                                
+            ];
+
+            $model = new desa();
+            $model->update($id, $data);        
+            $session->setFlashData('title', 'Data Calon Perbekel berhasil ditambahkan');
+            return redirect()->to(base_url('Home/calon/'.$id));
+        }                
+    }
+
+    public function input_ulang($id = null)
+    {
+        $data = [
+            'calon_1'        => '',
+            'calon_2'        => '',
+            'calon_3'        => '',
+            'calon_4'        => '',
+            'calon_5'        => '',
+            'gambar_calon_1' => '',
+            'gambar_calon_2' => '',
+            'gambar_calon_3' => '',
+            'gambar_calon_4' => '',
+            'gambar_calon_5' => '',
+        ];
+
+        $model = new desa();
+        $model->update($id, $data);        
+        session()->setFlashData('title', 'Data Calon Perbekel berhasil dihapus');
+        return redirect()->to(base_url('Home/calon/'.$id));
     }
 }

@@ -175,7 +175,7 @@
                         <div class="mb-3">
                             <label for="password" class="col-form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
-                        </div>    
+                        </div>                            
                         <div class="mb-3">
                             <label for="desa" class="col-form-label">Desa</label>
                             <select name="desa" class="form-select" id="inputGroupSelect01">
@@ -195,7 +195,7 @@
                                 <option value="13">Sangketan</option>
                                 <option value="14">Mengesta</option>                               
                             </select>
-                        </div>    
+                        </div>                            
                 </div>
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-danger">Reset</button>

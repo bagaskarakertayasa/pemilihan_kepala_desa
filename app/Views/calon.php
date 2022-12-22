@@ -28,7 +28,7 @@
             
             .btn_toggle {
                 margin-left: -3rem;
-            }  
+            }              
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -70,16 +70,34 @@
                     <?php foreach ($desa as $row) : ?>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Calon Perbekel</h1>
-                        <ol class="breadcrumb mb-4">
+                        <ol class="breadcrumb mb-3">
                             <li class="breadcrumb-item active">Calon Perbekel Desa <?= $row['nama_desa']; ?> Kecamatan <?= $row['kecamatan']; ?></li>
                         </ol>
 
-                        <a href="" class="btn btn-primary mb-5">Tambah Calon Perbekel</a>
+                        <?php if (empty($row['calon_1'] && $row['calon_2'])) : ?>
+                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambah_calon">
+                                Tambah Calon Perbekel
+                            </button>
+                        <?php endif; ?>
+                        
+                        <?php if (!empty($row['calon_1'] && $row['calon_2'])) : ?>
+                            <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#tambah_ulang">
+                                Input Ulang Calon Perbekel
+                            </button>
+                        <?php endif; ?>
+
+                        <?php $validation = \Config\Services::validation(); ?>
+                        <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">                                
+                                <h5><?php echo session()->getFlashdata('error') ?></h5>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="row">                            
+                            <?php if ($row['calon_1'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card">
-                                    <img src="" class="card-img-top" alt="gambar calon 1">
+                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1" width="354" height="472">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['calon_1']; ?></h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -87,10 +105,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php endif; ?>
                             
+                            <?php if ($row['calon_2'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card">
-                                    <img src="" class="card-img-top" alt="gambar calon 2">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2" width="354" height="472">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['calon_2']; ?></h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -98,11 +118,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php endif; ?>
 
                             <?php if ($row['calon_3'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card">
-                                    <img src="" class="card-img-top" alt="gambar calon 3">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3" width="354" height="472">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['calon_3']; ?></h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -115,7 +136,7 @@
                             <?php if ($row['calon_4'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card">
-                                    <img src="" class="card-img-top" alt="gambar calon 4">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4" width="354" height="472">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['calon_4']; ?></h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -128,7 +149,7 @@
                             <?php if ($row['calon_5'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card">
-                                    <img src="" class="card-img-top" alt="gambar calon 5">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5" width="354" height="472">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['calon_5']; ?></h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -148,6 +169,97 @@
                         </div>
                     </div>
                 </footer>
+            </div>
+        </div>
+
+    <!-- modal untuk tambah calon perbekel -->
+    <div class="modal fade" id="tambah_calon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Calon Perbekel</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">                    
+                <form action="<?= base_url('Home/proses_tambah_calon') ?>" method="post" enctype="multipart/form-data">
+                    <?= csrf_field() ?>
+                    <?php foreach ($desa as $row) : ?>
+                        <div class="alert alert-warning" role="alert">
+                            Diharapkan untuk kolom calon 3, 4, dan 5 dikosongkan apabila <strong>Desa <?= $row['nama_desa']; ?></strong>
+                            tidak memiliki calon 3, 4, dan 5
+                        </div>
+                    <?php endforeach; ?>
+                    <div class="alert alert-warning" role="alert">
+                        Ketentuan foto diharapkan untuk memiliki format jpg/jpeg/png dan size foto maksimal 2000 KB
+                    </div>
+                    <?php foreach ($desa as $row) : ?>                        
+                        <div class="mb-3">
+                            <label for="calon_1" class="col-form-label">Calon Pertama</label>
+                            <input type="text" name="calon_1" value="<?= old('calon_1', $row['calon_1']) ?>" class="form-control" placeholder="Masukan Nama Calon Pertama">
+                        </div>                                                    
+                        <div class="mb-3">
+                            <label for="calon_2" class="col-form-label">Calon Kedua</label>
+                            <input type="text" name="calon_2" value="<?= old('calon_2', $row['calon_2']) ?>" class="form-control" placeholder="Masukan Nama Calon Kedua">
+                        </div>                                                
+                        <div class="mb-3">
+                            <label for="calon_3" class="col-form-label">Calon Ketiga</label>
+                            <input type="text" name="calon_3" value="<?= old('calon_3', $row['calon_3']) ?>" class="form-control" placeholder="Masukan Nama Calon Ketiga">
+                        </div>                                                
+                        <div class="mb-3">
+                            <label for="calon_4" class="col-form-label">Calon Keempat</label>
+                            <input type="text" name="calon_4" value="<?= old('calon_4', $row['calon_4']) ?>" class="form-control" placeholder="Masukan Nama Calon Keempat">
+                        </div>                                                
+                        <div class="mb-3">
+                            <label for="calon_5" class="col-form-label">Calon Kelima</label>
+                            <input type="text" name="calon_5" value="<?= old('calon_5', $row['calon_5']) ?>" class="form-control" placeholder="Masukan Nama Calon Kelima">
+                        </div>                                                 
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Foto Calon Pertama</label>
+                            <input class="form-control" type="file" name="gambar_calon_1" value="<?= old('gambar_calon_1', $row['gambar_calon_1']) ?>" id="formFile">
+                        </div>                                                        
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Foto Calon Kedua</label>
+                            <input class="form-control" type="file" name="gambar_calon_2" id="formFile">
+                        </div>                                                        
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Foto Calon Ketiga</label>
+                            <input class="form-control" type="file" name="gambar_calon_3" id="formFile">
+                        </div>                                                        
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Foto Calon Keempat</label>
+                            <input class="form-control" type="file" name="gambar_calon_4" id="formFile">
+                        </div>                                                       
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Foto Calon Kelima</label>
+                            <input class="form-control" type="file" name="gambar_calon_5" id="formFile">
+                        </div>                                                                                                      
+                    <?php endforeach; ?>
+            </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>    
+            </form>          
+        </div>
+    </div>
+</div>
+
+        <!-- modal untuk logout -->
+        <div class="modal fade" id="tambah_ulang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Input Ulang</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">                    
+                    Apakah anda yakin ingin input ulang calon perbekel?
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="<?= base_url('Home/input_ulang') ?>/<?= session()->get('desa') ?>" class="btn btn-primary">Benar</a>
+                    </div>                    
+                </div>
             </div>
         </div>
 
@@ -180,6 +292,16 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
+            <?php if (session()->getFlashdata('title')) { ?>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '<?php echo session()->getFlashdata('title') ?>',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            <?php } ?>
+
             <?php if (session()->getFlashdata('icon')) { ?>
                 Swal.fire({
                     icon: '<?php echo session()->getFlashdata('icon') ?>',
