@@ -45,7 +45,8 @@
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-8 align-self-end">
                     <img src="<?= base_url('img/logo_tbn.png') ?>"
-                        class="mb-3" width="100px" height="100px">
+                        class="mb-3" width="100px" height="100px"><br>
+                    <img class="mb-3" src="<?= base_url('img/bupati_tabanan.png') ?>" alt="gambar bupati tabanan" width="350px" height="250px">
                     <h3 class="text-white fw-semibold">TABANAN ERA BARU (AUM)</h3>
                 </div>
                 <div class="col-lg-10 align-self-baseline">

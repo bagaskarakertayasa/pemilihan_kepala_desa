@@ -11,46 +11,50 @@
             href="<?= base_url('img/logo_tbn.png') ?>" />
         <link href="<?= base_url('css/styles.css') ?>" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
+        <style>
+            .tengah {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 500px;
+            }
+        </style>
+    </head>    
     <body class="bg-primary">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="row justify-content-center">                        
+                            <div class="col-lg-5">          
+                                <div class="tengah">    
+                                <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <h4>Harap perhatikan ketentuan di bawah</h4>
+                                        <?php echo session()->getFlashdata('error') ?>
+                                    </div>
+                                <?php endif; ?>                  
+                                <div class="card shadow-lg border-0 rounded-lg mt-3">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
                                         <?php $validation = \Config\Services::validation(); ?>
                                         <form action="<?= base_url('Home/login') ?>" method="POST"> 
                                             <div class="form-floating mb-3">
-                                                <input class="form-control <?= $validation->hasError('username') ? 'is-invalid' : null ?>" name="username" id="inputEmail" type="username" placeholder="Username" />
-                                                <label for="inputEmail">Username</label>
-                                                <div class="invalid-feedback">
-                                                    <?= $validation->getError('username'); ?>
-                                                </div>
+                                                <input class="form-control" name="username" value="<?= old('username') ?>" id="inputEmail" type="username" placeholder="Username" />
+                                                <label for="inputEmail">Username</label>                                            
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control <?= $validation->hasError('password') ? 'is-invalid' : null ?>" name="password" id="inputPassword" type="password" placeholder="Password" />
-                                                <label for="inputPassword">Password</label>
-                                                <div class="invalid-feedback">
-                                                    <?= $validation->getError('password'); ?>
-                                                </div>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-                                            </div>
+                                                <input class="form-control" name="password" value="<?= old('passsword') ?>" id="inputPassword" type="password" placeholder="Password" />
+                                                <label for="inputPassword">Password</label>                                                
+                                            </div>                                            
                                             <div class="d-grid mt-4 mb-0">
                                                 <button class="btn btn-primary" name="submit" type="submit">Login</button>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-center mt-2 mb-0">
-                                                <a class="small" href="#">Lupa Password?</a>
-                                            </div>                                            
+                                            </div>                                                                                        
                                         </form>
                                     </div>
                                 </div>
+                                </div>    
                             </div>
                         </div>
                     </div>

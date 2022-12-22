@@ -140,6 +140,7 @@ class Home extends BaseController
         ]);
 
         if (!$validate) {
+            session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
 
@@ -453,6 +454,9 @@ class Home extends BaseController
             $session->setFlashData('title', 'Data berhasil ditambahkan');            
             return redirect()->to(base_url('Home/tabel_tps/'.$session->get('desa')));
         } else {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');            
             return redirect()->back()->withInput();
         }
     }
@@ -552,10 +556,32 @@ class Home extends BaseController
             'desa'              => $session->get('desa'),
         ];
 
-        $model = new tps();
-        $model->update($id, $data);        
-        $session->setFlashData('title', 'Data TPS berhasil diubah');
-        return redirect()->to(base_url('Home/tabel_tps/'.$session->get('desa'))); 
+        try {
+            $model = new tps();
+            $model->update($id, $data);        
+            $session->setFlashData('title', 'Data TPS berhasil diubah');
+            return redirect()->to(base_url('Home/tabel_tps/'.$session->get('desa'))); 
+        } catch (\Exception $th) {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');
+            return redirect()->back()->withInput();
+        }        
+    }
+
+    public function hapus_tps($id = null)
+    {        
+        try {
+            $model = new tps();
+            $model->delete($id);
+            session()->setFlashData('title', 'Data TPS berhasil di hapus');        
+            return redirect()->to(base_url('Home/tabel_tps/'.session()->get('desa')));
+        } catch (\Exception $e) {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');
+            return redirect()->back()->withInput();
+        }        
     }
 
     public function proses_tambah_calon()
@@ -674,10 +700,18 @@ class Home extends BaseController
                 'gambar_calon_5' => $calon5,                                
             ];
 
-            $model = new desa();
-            $model->update($id, $data);        
-            $session->setFlashData('title', 'Data Calon Perbekel berhasil ditambahkan');
-            return redirect()->to(base_url('Home/calon/'.$id));
+            try {
+                $model = new desa();
+                $model->update($id, $data);        
+                $session->setFlashData('title', 'Data Calon Perbekel berhasil ditambahkan');
+                return redirect()->to(base_url('Home/calon/'.$id));
+            } catch (\Exception $th) {
+                session()->setFlashData('icon', 'error');
+                session()->setFlashData('title', 'Kesalahan Sistem');
+                session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');
+                return redirect()->back()->withInput();
+            }
+            
         }                
     }
 
@@ -696,9 +730,16 @@ class Home extends BaseController
             'gambar_calon_5' => '',
         ];
 
-        $model = new desa();
-        $model->update($id, $data);        
-        session()->setFlashData('title', 'Data Calon Perbekel berhasil dihapus');
-        return redirect()->to(base_url('Home/calon/'.$id));
+        try {
+            $model = new desa();
+            $model->update($id, $data);        
+            session()->setFlashData('title', 'Data Calon Perbekel berhasil dihapus');
+            return redirect()->to(base_url('Home/calon/'.$id));
+        } catch (\Exception $th) {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');
+            return redirect()->back()->withInput();
+        }        
     }
 }
