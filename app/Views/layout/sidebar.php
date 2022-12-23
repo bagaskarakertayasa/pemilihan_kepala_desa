@@ -11,6 +11,12 @@
                 Akun
             </a>
         <?php endif ?> 
+        <?php if (session()->get('desa') == null) : ?>
+            <a class="nav-link" href="<?= base_url('Home/daftar_tps') ?>">
+                <div class="sb-nav-link-icon"><i class="fas fa-vote-yea"></i></div>
+                Daftar TPS Tabanan
+            </a>
+        <?php endif ?> 
         <?php if (session()->get('desa') != null) : ?>
             <a class="nav-link" href="<?= base_url('Home/calon') ?>/<?= session()->get('desa') ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>

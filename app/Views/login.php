@@ -18,6 +18,13 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 500px;
+                height: 50%;
+            }
+
+            @media all and (max-width: 400px) and (orientation : portrait) {
+                .tengah {
+                    width: 350px;                    
+                }
             }
         </style>
     </head>    

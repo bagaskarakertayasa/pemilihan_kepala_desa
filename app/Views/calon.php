@@ -95,68 +95,58 @@
 
                         <div class="row">                            
                             <?php if ($row['calon_1'] != '') : ?>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1" width="354" height="472">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $row['calon_1']; ?></h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                        <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1" width="354" height="472">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center"><?= $row['calon_1']; ?></h5>                                        
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php endif; ?>
-                            
-                            <?php if ($row['calon_2'] != '') : ?>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2" width="354" height="472">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $row['calon_2']; ?></h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <?php endif; ?>
+                                
+                                <?php if ($row['calon_2'] != '') : ?>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2" width="354" height="472">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center"><?= $row['calon_2']; ?></h5>                                        
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
 
-                            <?php if ($row['calon_3'] != '') : ?>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3" width="354" height="472">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $row['calon_3']; ?></h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <?php if ($row['calon_3'] != '') : ?>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3" width="354" height="472">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $row['calon_3']; ?></h5>                                        
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
 
-                            <?php if ($row['calon_4'] != '') : ?>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4" width="354" height="472">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $row['calon_4']; ?></h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <?php if ($row['calon_4'] != '') : ?>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4" width="354" height="472">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center"><?= $row['calon_4']; ?></h5>                                        
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
 
-                            <?php if ($row['calon_5'] != '') : ?>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5" width="354" height="472">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $row['calon_5']; ?></h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <?php if ($row['calon_5'] != '') : ?>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5" width="354" height="472">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center"><?= $row['calon_5']; ?></h5>                                        
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php endif; ?>                            
                         </div>
                     </div>

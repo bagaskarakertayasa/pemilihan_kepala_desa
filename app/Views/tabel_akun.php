@@ -80,6 +80,12 @@
                     <h1 class="mt-4 mb-3">Akun Pengguna</h1>
 
                     <?php $validation = \Config\Services::validation(); ?>
+                    <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">                        
+                            <h4>Harap perhatikan ketentuan di bawah</h4>
+                            <?php echo session()->getFlashdata('error') ?>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="card mb-4">
                         <div class="card-header">
@@ -156,44 +162,45 @@
                 </div>
                 <div class="modal-body">
                     <form action="<?= base_url('Home/tambah_data_akun') ?>" method="post">
+                        <?= csrf_field() ?>
                         <div class="mb-3">
                             <label for="nama_depan" class="col-form-label">Nama Depan</label>
-                            <input type="text" name="nama_depan" class="form-control" id="nama_depan" placeholder="Masukan Nama Depan">
+                            <input type="text" name="nama_depan" class="form-control" value="<?= old('nama_depan') ?>" id="nama_depan" placeholder="Masukan Nama Depan">
                         </div>
                         <div class="mb-3">
                             <label for="nama_belakang" class="col-form-label">Nama Belakang</label>
-                            <input type="text" name="nama_belakang" class="form-control" id="nama_belakang" placeholder="Masukan Nama Belakang">
+                            <input type="text" name="nama_belakang" class="form-control" value="<?= old('nama_belakang') ?>" id="nama_belakang" placeholder="Masukan Nama Belakang">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="contoh@gmail.com">
+                            <input type="email" name="email" class="form-control" value="<?= old('email') ?>" id="email" placeholder="contoh@gmail.com">
                         </div>
                         <div class="mb-3">
                             <label for="username" class="col-form-label">Username</label>
-                            <input type="text" name="username" class="form-control" id="username" placeholder="Masukan Username">
+                            <input type="text" name="username" class="form-control" value="<?= old('username') ?>" id="username" placeholder="Masukan Username">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="col-form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
+                            <input type="password" name="password" class="form-control" value="<?= old('password') ?>" id="password" placeholder="Masukan Password">
                         </div>                            
                         <div class="mb-3">
                             <label for="desa" class="col-form-label">Desa</label>
                             <select name="desa" class="form-select" id="inputGroupSelect01">
                                 <option selected disabled>Silahkan pilih desa</option>                                                                
-                                <option value="1">Bantiran</option>
-                                <option value="2">Jelijih Punggang</option>
-                                <option value="3">Angkah</option>
-                                <option value="4">Mundeh Kauh</option>
-                                <option value="5">Megati</option>
-                                <option value="6">Abiantuwung</option>
-                                <option value="7">Perean Kangin</option>
-                                <option value="8">Kukuh</option>
-                                <option value="9">Baru</option>
-                                <option value="10">Marga Dauh Puri</option>
-                                <option value="11">Marga Dajan Puri</option>
-                                <option value="12">Biaung</option>
-                                <option value="13">Sangketan</option>
-                                <option value="14">Mengesta</option>                               
+                                <option value="1" <?php if(old('desa') == '1'){ echo 'selected'; } ?>>Bantiran</option>
+                                <option value="2" <?php if(old('desa') == '2'){ echo 'selected'; } ?>>Jelijih Punggang</option>
+                                <option value="3" <?php if(old('desa') == '3'){ echo 'selected'; } ?>>Angkah</option>
+                                <option value="4" <?php if(old('desa') == '4'){ echo 'selected'; } ?>>Mundeh Kauh</option>
+                                <option value="5" <?php if(old('desa') == '5'){ echo 'selected'; } ?>>Megati</option>
+                                <option value="6" <?php if(old('desa') == '6'){ echo 'selected'; } ?>>Abiantuwung</option>
+                                <option value="7" <?php if(old('desa') == '7'){ echo 'selected'; } ?>>Perean Kangin</option>
+                                <option value="8" <?php if(old('desa') == '8'){ echo 'selected'; } ?>>Kukuh</option>
+                                <option value="9" <?php if(old('desa') == '9'){ echo 'selected'; } ?>>Baru</option>
+                                <option value="10" <?php if(old('desa') == '10'){ echo 'selected'; } ?>>Marga Dauh Puri</option>
+                                <option value="11" <?php if(old('desa') == '11'){ echo 'selected'; } ?>>Marga Dajan Puri</option>
+                                <option value="12" <?php if(old('desa') == '12'){ echo 'selected'; } ?>>Biaung</option>
+                                <option value="13" <?php if(old('desa') == '13'){ echo 'selected'; } ?>>Sangketan</option>
+                                <option value="14" <?php if(old('desa') == '14'){ echo 'selected'; } ?>>Mengesta</option>                               
                             </select>
                         </div>                            
                 </div>
@@ -218,26 +225,27 @@
                 </div>
                 <div class="modal-body">
                     <form action="<?= base_url('Home/edit_data_akun') ?>" method="post">
+                        <?= csrf_field() ?>
                         <input type="text" value="<?= $row['id_akun']; ?>" name="id_akun" hidden>
                         <div class="mb-3">
                             <label for="nama_depan" class="col-form-label">Nama Depan</label>
                             <input type="text" name="nama_depan" class="form-control" id="nama_depan" placeholder="Masukan Nama Depan"
-                                value="<?= $row['nama_depan']; ?>">
+                                value="<?= old('nama_depan', $row['nama_depan']); ?>">
                         </div>
                         <div class="mb-3">
                             <label for="nama_belakang" class="col-form-label">Nama Belakang</label>
                             <input type="text" name="nama_belakang" class="form-control" id="nama_belakang" placeholder="Masukan Nama Belakang"
-                                value="<?= $row['nama_belakang']; ?>">
+                                value="<?= old('nama_belakang', $row['nama_belakang']); ?>">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email</label>
                             <input type="email" name="email" class="form-control" id="email" placeholder="contoh@gmail.com"
-                                value="<?= $row['email']; ?>">
+                                value="<?= old('email', $row['email']); ?>">
                         </div>
                         <div class="mb-3">
                             <label for="username" class="col-form-label">Username</label>
                             <input type="text" name="username" class="form-control" id="username" placeholder="Masukan Username"
-                                value="<?= $row['username']; ?>">
+                                value="<?= old('username', $row['username']); ?>">
                         </div>  
                         <div class="mb-3">
                             <label for="desa" class="col-form-label">Desa</label>
@@ -282,10 +290,11 @@
                 </div>
                 <div class="modal-body">
                     <form action="<?= base_url('Home/ubah_password') ?>" method="post">
+                        <?= csrf_field() ?>
                         <input type="text" value="<?= $row['id_akun']; ?>" name="id_akun" hidden>
                         <div class="mb-3">
                             <label for="password" class="col-form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
+                            <input type="password" name="password" class="form-control" value="<?= old('password') ?>" id="password" placeholder="Masukan Password">
                         </div>                                             
                 </div>
                         <div class="modal-footer">

@@ -64,6 +64,18 @@ class Home extends BaseController
         }
     }
 
+    public function daftar_tps()
+    {
+        if (session()->get('logged_in') == true) {
+            return view('filter_tps');
+        } else {
+            session()->setFlashData('icon', 'warning');
+            session()->setFlashData('title', 'Login');
+            session()->setFlashData('text', 'Maaf, anda diharuskan untuk login terlebih dahulu');
+            return redirect()->to(base_url('Home/login_page'));
+        }
+    }
+
     public function tabel_tps($id)
     {
         if (session()->get('logged_in') == true) {
@@ -196,33 +208,38 @@ class Home extends BaseController
 
         $validate = $this->validate([
             'nama_depan' => [
-                'rules'  => 'required',
+                'rules'  => 'required|alpha_space',
                 'errors' => [
-                    'required' => 'Kolom Nama Depan tidak boleh kosong'
+                    'required' => 'Kolom Nama Depan tidak boleh kosong',
+                    'alpha_space' => 'Nama Depan tidak boleh menggunakan karakter selain huruf dan spasi',
                 ],
             ],
             'nama_belakang' => [
-                'rules'  => 'required',
+                'rules'  => 'required|alpha_space',
                 'errors' => [
-                    'required' => 'Kolom Nama Belakang tidak boleh kosong'
+                    'required' => 'Kolom Nama Belakang tidak boleh kosong',
+                    'alpha_space' => 'Nama Belakang tidak boleh menggunakan karakter selain huruf dan spasi',
                 ],
             ],
             'email' => [
-                'rules'  => 'required',
+                'rules'  => 'required|valid_email',
                 'errors' => [
-                    'required' => 'Kolom Email tidak boleh kosong'
+                    'required' => 'Kolom Email tidak boleh kosong',
+                    'valid_email' => 'Email anda tidak valid',
                 ],
             ],
             'username' => [
-                'rules'  => 'required',
+                'rules'  => 'required|min_length[4]',
                 'errors' => [
-                    'required' => 'Kolom Username tidak boleh kosong'
+                    'required' => 'Kolom Username tidak boleh kosong',                    
+                    'min_length' => 'Username minimal memiliki 4 karakter',                    
                 ],
             ],
             'password' => [
-                'rules'  => 'required',
+                'rules'  => 'required|min_length[4]',
                 'errors' => [
-                    'required' => 'Kolom Password tidak boleh kosong'
+                    'required' => 'Kolom Password tidak boleh kosong',
+                    'min_length' => 'Password minimal memiliki 4 karakter',
                 ],
             ],
             'desa' => [
@@ -234,6 +251,7 @@ class Home extends BaseController
         ]);
 
         if (!$validate) {
+            session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
 
@@ -256,6 +274,9 @@ class Home extends BaseController
             $session->setFlashData('title', 'Akun Pengguna berhasil ditambahkan');            
             return redirect()->to(base_url('Home/tabel_akun'));
         } else {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');                        
             return redirect()->back()->withInput();
         }
     }
@@ -266,27 +287,31 @@ class Home extends BaseController
 
         $validate = $this->validate([
             'nama_depan' => [
-                'rules'  => 'required',
+                'rules'  => 'required|alpha_space',
                 'errors' => [
-                    'required' => 'Kolom Nama Depan tidak boleh kosong'
+                    'required' => 'Kolom Nama Depan tidak boleh kosong',
+                    'alpha_space' => 'Nama Depan tidak boleh menggunakan karakter selain huruf dan spasi',
                 ],
             ],
             'nama_belakang' => [
-                'rules'  => 'required',
+                'rules'  => 'required|alpha_space',
                 'errors' => [
-                    'required' => 'Kolom Nama Belakang tidak boleh kosong'
+                    'required' => 'Kolom Nama Belakang tidak boleh kosong',
+                    'alpha_space' => 'Nama Belakang tidak boleh menggunakan karakter selain huruf dan spasi',
                 ],
             ],
             'email' => [
-                'rules'  => 'required',
+                'rules'  => 'required|valid_email',
                 'errors' => [
-                    'required' => 'Kolom Email tidak boleh kosong'
+                    'required' => 'Kolom Email tidak boleh kosong',
+                    'valid_email' => 'Email anda tidak valid',
                 ],
             ],
             'username' => [
-                'rules'  => 'required',
+                'rules'  => 'required|min_length[4]',
                 'errors' => [
-                    'required' => 'Kolom Username tidak boleh kosong'
+                    'required' => 'Kolom Username tidak boleh kosong',                    
+                    'min_length' => 'Username minimal memiliki 4 karakter',                    
                 ],
             ],
             'desa' => [
@@ -297,9 +322,10 @@ class Home extends BaseController
             ],
         ]);
 
-        // if (!$validate) {
-        //     return redirect()->back()->withInput();
-        // }
+        if (!$validate) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
 
         $id_akun = $_POST['id_akun'];        
         $data = [
@@ -309,11 +335,18 @@ class Home extends BaseController
             'username'      => $this->request->getPost('username'),            
             'desa'          => $this->request->getPost('desa'),            
         ];
-                
-        $model = new akun();
-        $model->update($id_akun, $data);        
-        $session->setFlashData('title', 'Akun Pengguna berhasil diubah');
-        return redirect()->to(base_url('Home/tabel_akun')); 
+          
+        try {                
+            $model = new akun();
+            $model->update($id_akun, $data);        
+            $session->setFlashData('title', 'Akun Pengguna berhasil diubah');
+            return redirect()->to(base_url('Home/tabel_akun')); 
+        } catch (\Exception $th) {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');            
+            return redirect()->back()->withInput();
+        }
     }
 
     public function ubah_password()
@@ -322,25 +355,35 @@ class Home extends BaseController
 
         $validate = $this->validate([
             'password' => [
-                'rules'  => 'required',
+                'rules'  => 'required|min_length[4]',
                 'errors' => [
-                    'required' => 'Kolom Password tidak boleh kosong'
+                    'required' => 'Kolom Password tidak boleh kosong',
+                    'min_length' => 'Password minimal memiliki 4 karakter',
                 ],
             ],
         ]);
 
-        // if (!$validate) {
-        //     return redirect()->back()->withInput();
-        // }
+        if (!$validate) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
 
         $id_akun = $_POST['id_akun'];       
         $password = $this->request->getPost('password');
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $data = ['password' => $hash];
-        $model = new akun();
-        $model->update($id_akun, $data);        
-        $session->setFlashData('title', 'Password berhasil diubah');
-        return redirect()->to(base_url('Home/tabel_akun')); 
+
+        try {
+            $model = new akun();
+            $model->update($id_akun, $data);        
+            $session->setFlashData('title', 'Password berhasil diubah');
+            return redirect()->to(base_url('Home/tabel_akun')); 
+        } catch (\Exception $th) {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');            
+            return redirect()->back()->withInput();
+        }        
     }
 
     public function ubah_status($id = null)
@@ -349,11 +392,35 @@ class Home extends BaseController
             'status' => "nonaktif"            
         ];
 
-        $model = new akun();
-        $model->update($id, $data);
-        session()->setFlashData('title', 'Status akun berhasil diubah');        
-        return redirect()->to(base_url('Home/tabel_akun'));
+        try {
+            $model = new akun();
+            $model->update($id, $data);
+            session()->setFlashData('title', 'Status akun berhasil diubah');        
+            return redirect()->to(base_url('Home/tabel_akun'));
+        } catch (\Exception $th) {
+            session()->setFlashData('icon', 'error');
+            session()->setFlashData('title', 'Kesalahan Sistem');
+            session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');            
+            return redirect()->back()->withInput();
+        }        
     } 
+
+    public function filter_tps()
+    {        
+        $desa = $this->request->getPost('desa');
+        $model = new tps();
+        if ($desa != '') {
+            $tps = $model->getTPS($desa);
+            // echo "<pre>";
+            // print_r($tps);                        
+            return view('daftar_tps', compact('tps'));
+        } else {
+            session()->setFlashData('icon', 'warning');
+            session()->setFlashData('title', 'Inputan Kosong');
+            session()->setFlashData('text', 'Maaf, inputan tidak boleh kosong');            
+            return redirect()->back()->withInput();
+        }
+    }
 
     public function proses_tambah_tps()
     {
