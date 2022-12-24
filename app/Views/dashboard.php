@@ -49,7 +49,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <img class="logo" src="<?= base_url('img/logo_tbn.png') ?>" alt="logo tabanan">
-            <a class="navbar-brand ps-2" href="<?= base_url('Home/dashboard') ?>">Itung Cepat</a>
+            <a class="navbar-brand ps-2" href="<?= base_url('dashboard') ?>">Itung Cepat</a>
             <!-- Sidebar Toggle-->
             <button class="btn_toggle btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -111,7 +111,7 @@
                 </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url('Home/keluar') ?>" class="btn btn-danger">Keluar</a>
+                        <a href="<?= base_url('keluar') ?>" class="btn btn-danger">Keluar</a>
                     </div>                    
                 </div>
             </div>

@@ -7,8 +7,7 @@ class tps extends Model
 {
     protected $table = 'tps';
     protected $primaryKey = 'id_tps';
-    protected $allowedFields = [        
-        'nomer_tps',
+    protected $allowedFields = [                
         'banjar_tps',
         'jml_pml_tetap',
         'mgn_hak_suara',

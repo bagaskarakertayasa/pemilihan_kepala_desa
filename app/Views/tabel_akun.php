@@ -129,7 +129,7 @@
                                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pass_modal<?= $row['id_akun']; ?>">
                                                         Ubah Password
                                                     </button>
-                                                    <button type="button" <?= $row['status'] == 'nonaktif' ? 'disabled' : null ?> class="btn btn-warning"
+                                                    <button type="button" <?= $row['status'] == 'nonaktif' ? 'disabled' : null ?> class="btn btn-danger"
                                                         data-bs-toggle="modal" data-bs-target="#status_modal<?= $row['id_akun']; ?>">Ubah Status</button>
                                                 </td>
                                             </tr>
@@ -161,7 +161,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('Home/tambah_data_akun') ?>" method="post">
+                    <form action="<?= base_url('tambah_data_akun') ?>" method="post">
                         <?= csrf_field() ?>
                         <div class="mb-3">
                             <label for="nama_depan" class="col-form-label">Nama Depan</label>
@@ -224,7 +224,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('Home/edit_data_akun') ?>" method="post">
+                    <form action="<?= base_url('edit_data_akun') ?>" method="post">
                         <?= csrf_field() ?>
                         <input type="text" value="<?= $row['id_akun']; ?>" name="id_akun" hidden>
                         <div class="mb-3">
@@ -289,7 +289,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('Home/ubah_password') ?>" method="post">
+                    <form action="<?= base_url('ubah_password') ?>" method="post">
                         <?= csrf_field() ?>
                         <input type="text" value="<?= $row['id_akun']; ?>" name="id_akun" hidden>
                         <div class="mb-3">
@@ -308,8 +308,10 @@
     <?php endforeach ?>
 
     <!-- Modal ubah status -->
-    <?php $no = 0;
-    foreach ($akun as $row) : $no++ ?>
+    <?php 
+        $no = 0;        
+        foreach ($akun as $row) : $no++         
+    ?>
         <div class="modal fade" id="status_modal<?= $row['id_akun']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -322,7 +324,7 @@
                 </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url('Home/ubah_status') ?>/<?= $row['id_akun']; ?>" class="btn btn-danger">Benar</a>
+                        <a href="<?= base_url('ubah_status') ?>/<?= $row['id_akun'] ?>" class="btn btn-danger">Benar</a>
                     </div>                    
                 </div>
             </div>
@@ -342,7 +344,7 @@
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="<?= base_url('Home/keluar') ?>" class="btn btn-danger">Keluar</a>
+                    <a href="<?= base_url('keluar') ?>" class="btn btn-danger">Keluar</a>
                 </div>                    
             </div>
         </div>

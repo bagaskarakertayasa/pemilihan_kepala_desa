@@ -97,26 +97,26 @@
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th>TPS</th>
-                                        <th>Jumlah Pemilih Tetap</th>
-                                        <th>Menggunakan Hak Suara</th>
-                                        <th>Tidak Menggunakan Hak Suara</th>
-                                        <th>Suara Tidak Sah</th>
+                                        <th class="text-center">TPS</th>
+                                        <th class="text-center">Jumlah Pemilih Tetap</th>
+                                        <th class="text-center">Menggunakan Hak Suara</th>
+                                        <th class="text-center">Tidak Menggunakan Hak Suara</th>
+                                        <th class="text-center">Suara Tidak Sah</th>
                                         <?php foreach ($tps as $row) : ?>
-                                            <th>(1) <?= $row['calon_1']; ?></th>                                                                                 
-                                            <th>(2) <?= $row['calon_2']; ?></th>
+                                            <th class="text-center">(1) <?= $row['calon_1']; ?></th>                                                                                 
+                                            <th class="text-center">(2) <?= $row['calon_2']; ?></th>
                                             <?php if ($row['calon_3'] != '') : ?>
-                                                <th>(3) <?= $row['calon_3']; ?></th>
+                                                <th class="text-center">(3) <?= $row['calon_3']; ?></th>
                                             <?php endif; ?>
                                             <?php if ($row['calon_4'] != '') : ?>
-                                                <th>(4) <?= $row['calon_4']; ?></th>
+                                                <th class="text-center">(4) <?= $row['calon_4']; ?></th>
                                             <?php endif; ?>
                                             <?php if ($row['calon_5'] != '') : ?>
-                                                <th>(4) <?= $row['calon_5']; ?></th>
+                                                <th class="text-center">(4) <?= $row['calon_5']; ?></th>
                                             <?php endif; ?>
                                         <?php break; ?>
                                         <?php endforeach; ?>                                                                                                                    
-                                        <th>Aksi</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,29 +124,29 @@
                                     <?php foreach ($tps as $row) : ?>
                                         <?php if ($row['id_tps'] != '') : ?>
                                         <tr>                                            
-                                            <td><?= $no++; ?> TPS BR. <?= $row['banjar_tps']; ?></td>
-                                            <td><?= $row['jml_pml_tetap'] ?></td>
-                                            <td><?= $row['mgn_hak_suara'] ?></td>
-                                            <td><?= $row['tdk_mgn_hak_suara'] ?></td>
-                                            <td><?= $row['suara_tdk_sah'] ?></td>    
-                                            <td><?= $row['calon1'] ?></td>    
-                                            <td><?= $row['calon2'] ?></td>
+                                            <td>TPS <?= $no++; ?> BR. <?= $row['banjar_tps']; ?></td>
+                                            <td class="text-center"><?= $row['jml_pml_tetap'] ?></td>
+                                            <td class="text-center"><?= $row['mgn_hak_suara'] ?></td>
+                                            <td class="text-center"><?= $row['tdk_mgn_hak_suara'] ?></td>
+                                            <td class="text-center"><?= $row['suara_tdk_sah'] ?></td>    
+                                            <td class="text-center"><?= $row['calon1'] ?></td>    
+                                            <td class="text-center"><?= $row['calon2'] ?></td>
                                             <?php if ($row['calon_3'] != '') : ?>
-                                                <td><?= $row['calon3']; ?></td>
+                                                <td class="text-center"><?= $row['calon3']; ?></td>
                                             <?php endif; ?>         
                                             <?php if ($row['calon_4'] != '') : ?>
-                                                <td><?= $row['calon4']; ?></td>
+                                                <td class="text-center"><?= $row['calon4']; ?></td>
                                             <?php endif; ?>         
                                             <?php if ($row['calon_5'] != '') : ?>
-                                                <td><?= $row['calon5']; ?></td>
+                                                <td class="text-center"><?= $row['calon5']; ?></td>
                                             <?php endif; ?>                                            
                                             <td>
-                                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal<?= $row['id_tps']; ?>">
+                                                <button type="button" class="m-1 btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal<?= $row['id_tps']; ?>">
                                                     Edit
                                                 </button>
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus_modal<?= $row['id_tps']; ?>">
+                                                <button type="button" class="m-1 btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus_modal<?= $row['id_tps']; ?>">
                                                     Hapus
-                                                </button>
+                                                </button>                                                
                                             </td>
                                         </tr>
                                         <?php endif; ?>
@@ -168,26 +168,8 @@
         </div>
     </div>
 
-    <!-- modal untuk logout -->
-    <div class="modal fade" id="keluar_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">                    
-                Apakah anda yakin ingin keluar?
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="<?= base_url('Home/keluar') ?>" class="btn btn-danger">Keluar</a>
-                </div>                    
-            </div>
-        </div>
-    </div>
-
     <!-- modal untuk hapus tps -->
+    <?php foreach ($tps as $row) : ?>
     <div class="modal fade" id="hapus_modal<?= $row['id_tps']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -200,11 +182,12 @@
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="<?= base_url('Home/hapus_tps') ?>/<?= $row['id_tps']; ?>" class="btn btn-danger">Benar</a>
+                    <a href="<?= base_url('hapus_tps') ?>/<?= $row['id_tps'] ?>" class="btn btn-danger">Benar</a>
                 </div>                    
             </div>
         </div>
     </div>
+    <?php endforeach; ?>
 
     <!-- modal untuk tambah tps -->
     <div class="modal fade" id="tambah_tps" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -215,7 +198,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">                    
-                <form action="<?= base_url('Home/proses_tambah_tps') ?>" method="post">
+                <form action="<?= base_url('proses_tambah_tps') ?>" method="post">
                     <?= csrf_field() ?>
                     <div class="mb-3">
                         <label for="banjar_tps" class="col-form-label">Banjar TPS</label>
@@ -226,12 +209,12 @@
                         <input type="number" name="jml_pml_tetap" value="<?= old('jml_pml_tetap') ?>" class="form-control" placeholder="Masukan Jumlah Pemilih Tetap">
                     </div>
                     <div class="mb-3">
-                        <label for="mgn_hak_suara" class="col-form-label">Jumlah Yang Menggunakan Hak Suara</label>
-                        <input type="number" name="mgn_hak_suara" value="<?= old('mgn_hak_suara') ?>" class="form-control" placeholder="Masukan jumlah yang menggunakan hak suara">
+                        <label for="mgn_hak_suara" class="col-form-label">Jumlah Pemilih Yang Menggunakan Hak Suara</label>
+                        <input type="number" name="mgn_hak_suara" value="<?= old('mgn_hak_suara') ?>" class="form-control" placeholder="Masukan jumlah pemilih yang menggunakan hak suara">
                     </div>
                     <div class="mb-3">
-                        <label for="tdk_mgn_hak_suara" class="col-form-label">Jumlah Yang Tidak Menggunakan Hak Suara</label>
-                        <input type="number" name="tdk_mgn_hak_suara" value="<?= old('tdk_mgn_hak_suara') ?>" class="form-control" placeholder="Masukan jumlah yang tidak menggunakan hak suara">
+                        <label for="tdk_mgn_hak_suara" class="col-form-label">Jumlah Pemilih Yang Tidak Menggunakan Hak Suara</label>
+                        <input type="number" name="tdk_mgn_hak_suara" value="<?= old('tdk_mgn_hak_suara') ?>" class="form-control" placeholder="Masukan jumlah pemilih yang tidak menggunakan hak suara">
                     </div>
                     <div class="mb-3">
                         <label for="suara_tdk_sah" class="col-form-label">Suara Tidak Sah</label>
@@ -287,7 +270,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('Home/edit_data_tps') ?>" method="post">
+                    <form action="<?= base_url('edit_data_tps') ?>" method="post">
                         <?= csrf_field() ?>
                         <input type="text" value="<?= $row['id_tps']; ?>" name="id_tps" hidden>
                         <div class="mb-3">
@@ -356,6 +339,25 @@
             </div>
         </div>
     <?php endforeach ?>
+
+    <!-- modal untuk logout -->
+    <div class="modal fade" id="keluar_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">                    
+                Apakah anda yakin ingin keluar?
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="<?= base_url('keluar') ?>" class="btn btn-danger">Keluar</a>
+                </div>                    
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>

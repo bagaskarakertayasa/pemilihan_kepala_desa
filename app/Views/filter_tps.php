@@ -83,7 +83,7 @@
                                 <h6 class="m-0 fw-normal">Filter TPS Berdasarkan Desa</h6>
                             </div>
                             <div class="card-body">
-                                <form action="<?= base_url('Home/filter_tps'); ?>" method="post">
+                                <form action="<?= base_url('filter_tps'); ?>" method="post">
                                     <?= csrf_field() ?>
                                     <div class="mb-3">
                                         <label for="desa" class="col-form-label">Desa</label>
@@ -136,7 +136,7 @@
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="<?= base_url('Home/keluar') ?>" class="btn btn-danger">Keluar</a>
+                    <a href="<?= base_url('keluar') ?>" class="btn btn-danger">Keluar</a>
                 </div>                    
             </div>
         </div>

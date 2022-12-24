@@ -83,7 +83,7 @@
                                 <h6 class="m-0 fw-normal">Filter TPS Berdasarkan Desa</h6>
                             </div>
                             <div class="card-body">
-                                <form action="<?= base_url('Home/filter_tps'); ?>" method="post">
+                                <form action="<?= base_url('filter_tps'); ?>" method="post">
                                     <?= csrf_field() ?>
                                     <?php foreach ($tps as $row) : ?>
                                         <div class="mb-3">
@@ -123,22 +123,22 @@
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>                                        
-                                        <th>TPS</th>
-                                        <th>Jumlah Pemilih Tetap</th>
-                                        <th>Menggunakan Hak Suara</th>
-                                        <th>Tidak Menggunakan Hak Suara</th>
-                                        <th>Suara Tidak Sah</th>
+                                        <th class="text-center">TPS</th>
+                                        <th class="text-center">Jumlah Pemilih Tetap</th>
+                                        <th class="text-center">Menggunakan Hak Suara</th>
+                                        <th class="text-center">Tidak Menggunakan Hak Suara</th>
+                                        <th class="text-center">Suara Tidak Sah</th>
                                         <?php foreach ($tps as $row) : ?>
-                                            <th>(1) <?= $row['calon_1']; ?></th>                                                                                 
-                                            <th>(2) <?= $row['calon_2']; ?></th>
+                                            <th class="text-center">(1) <?= $row['calon_1']; ?></th>                                                                                 
+                                            <th class="text-center">(2) <?= $row['calon_2']; ?></th>
                                             <?php if ($row['calon_3'] != '') : ?>
-                                                <th>(3) <?= $row['calon_3']; ?></th>
+                                                <th class="text-center">(3) <?= $row['calon_3']; ?></th>
                                             <?php endif; ?>
                                             <?php if ($row['calon_4'] != '') : ?>
-                                                <th>(4) <?= $row['calon_4']; ?></th>
+                                                <th class="text-center">(4) <?= $row['calon_4']; ?></th>
                                             <?php endif; ?>
                                             <?php if ($row['calon_5'] != '') : ?>
-                                                <th>(4) <?= $row['calon_5']; ?></th>
+                                                <th class="text-center">(4) <?= $row['calon_5']; ?></th>
                                             <?php endif; ?>
                                         <?php break; ?>
                                         <?php endforeach; ?>                                         
@@ -150,20 +150,20 @@
                                         <?php if ($row['id_tps'] != '') : ?>
                                         <tr>                                            
                                             <td><?= $no++; ?> TPS BR. <?= $row['banjar_tps']; ?></td>
-                                            <td><?= $row['jml_pml_tetap'] ?></td>
-                                            <td><?= $row['mgn_hak_suara'] ?></td>
-                                            <td><?= $row['tdk_mgn_hak_suara'] ?></td>
-                                            <td><?= $row['suara_tdk_sah'] ?></td>    
-                                            <td><?= $row['calon1'] ?></td>    
-                                            <td><?= $row['calon2'] ?></td>
+                                            <td class="text-center"><?= $row['jml_pml_tetap'] ?></td>
+                                            <td class="text-center"><?= $row['mgn_hak_suara'] ?></td>
+                                            <td class="text-center"><?= $row['tdk_mgn_hak_suara'] ?></td>
+                                            <td class="text-center"><?= $row['suara_tdk_sah'] ?></td>    
+                                            <td class="text-center"><?= $row['calon1'] ?></td>    
+                                            <td class="text-center"><?= $row['calon2'] ?></td>
                                             <?php if ($row['calon_3'] != '') : ?>
-                                                <td><?= $row['calon3']; ?></td>
+                                                <td class="text-center"><?= $row['calon3']; ?></td>
                                             <?php endif; ?>         
                                             <?php if ($row['calon_4'] != '') : ?>
-                                                <td><?= $row['calon4']; ?></td>
+                                                <td class="text-center"><?= $row['calon4']; ?></td>
                                             <?php endif; ?>         
                                             <?php if ($row['calon_5'] != '') : ?>
-                                                <td><?= $row['calon5']; ?></td>
+                                                <td class="text-center"><?= $row['calon5']; ?></td>
                                             <?php endif; ?>                                            
                                         </tr>
                                         <?php endif; ?>
@@ -180,6 +180,7 @@
                                 <div class="card">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1" width="354" height="472">
                                     <div class="card-body">
+                                        <h6 class="text-center">(1)</h6>   
                                         <h5 class="card-title text-center"><?= $row['calon_1']; ?></h5>                                        
                                     </div>
                                 </div>
@@ -191,6 +192,7 @@
                                 <div class="card">
                                 <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2" width="354" height="472">
                                     <div class="card-body">
+                                        <h6 class="text-center">(2)</h6>   
                                         <h5 class="card-title text-center"><?= $row['calon_2']; ?></h5>                                        
                                     </div>
                                 </div>
@@ -202,6 +204,7 @@
                                 <div class="card">
                                 <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3" width="354" height="472">
                                     <div class="card-body">
+                                        <h6 class="text-center">(3)</h6>   
                                         <h5 class="card-title text-center"><?= $row['calon_3']; ?></h5>                                        
                                     </div>
                                 </div>
@@ -213,6 +216,7 @@
                                 <div class="card">
                                 <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4" width="354" height="472">
                                     <div class="card-body">
+                                        <h6 class="text-center">(4)</h6>   
                                         <h5 class="card-title text-center"><?= $row['calon_4']; ?></h5>                                        
                                     </div>
                                 </div>
@@ -224,6 +228,7 @@
                                 <div class="card">
                                 <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5" width="354" height="472">
                                     <div class="card-body">
+                                        <h6 class="text-center">(5)</h6>   
                                         <h5 class="card-title text-center"><?= $row['calon_5']; ?></h5>                                        
                                     </div>
                                 </div>
@@ -259,7 +264,7 @@
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="<?= base_url('Home/keluar') ?>" class="btn btn-danger">Keluar</a>
+                    <a href="<?= base_url('keluar') ?>" class="btn btn-danger">Keluar</a>
                 </div>                    
             </div>
         </div>

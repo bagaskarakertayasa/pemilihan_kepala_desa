@@ -53,7 +53,7 @@
                     <p class="text-dpmd">DPMD Kabupaten Tabanan</p>
                     <h1 class="judul_apk text-white fw-bold mb-3">ITUNG CEPAT PEMILIHAN PERBEKEL <br>
                         KABUPATEN TABANAN</h1>
-                    <a class="btn text-white" href="<?= base_url('Home/login_page') ?>">Masuk</a>
+                    <a class="btn text-white" href="<?= base_url('login') ?>">Masuk</a>
                 </div>
             </div>
         </div>

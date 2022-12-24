@@ -46,7 +46,7 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
                                         <?php $validation = \Config\Services::validation(); ?>
-                                        <form action="<?= base_url('Home/login') ?>" method="POST"> 
+                                        <form action="<?= base_url('proses_login') ?>" method="POST"> 
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" name="username" value="<?= old('username') ?>" id="inputEmail" type="username" placeholder="Username" />
                                                 <label for="inputEmail">Username</label>                                            

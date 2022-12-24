@@ -99,6 +99,7 @@
                                     <div class="card">
                                         <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1" width="354" height="472">
                                         <div class="card-body">
+                                            <h6 class="text-center">(1)</h6>
                                             <h5 class="card-title text-center"><?= $row['calon_1']; ?></h5>                                        
                                         </div>
                                     </div>
@@ -110,6 +111,7 @@
                                     <div class="card">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2" width="354" height="472">
                                         <div class="card-body">
+                                            <h6 class="text-center">(2)</h6>
                                             <h5 class="card-title text-center"><?= $row['calon_2']; ?></h5>                                        
                                         </div>
                                     </div>
@@ -121,7 +123,8 @@
                                     <div class="card">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3" width="354" height="472">
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= $row['calon_3']; ?></h5>                                        
+                                            <h6 class="text-center">(3)</h6>
+                                            <h5 class="card-title text-center"><?= $row['calon_3']; ?></h5>                                        
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +134,8 @@
                                 <div class="col-xl-3 col-md-6">
                                     <div class="card">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4" width="354" height="472">
-                                        <div class="card-body">
+                                        <div class="card-body">                
+                                            <h6 class="text-center">(4)</h6>                            
                                             <h5 class="card-title text-center"><?= $row['calon_4']; ?></h5>                                        
                                         </div>
                                     </div>
@@ -143,6 +147,7 @@
                                     <div class="card">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5" width="354" height="472">
                                         <div class="card-body">
+                                            <h6 class="text-center">(5)</h6>
                                             <h5 class="card-title text-center"><?= $row['calon_5']; ?></h5>                                        
                                         </div>
                                     </div>
@@ -171,7 +176,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">                    
-                <form action="<?= base_url('Home/proses_tambah_calon') ?>" method="post" enctype="multipart/form-data">
+                <form action="<?= base_url('proses_tambah_calon') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field() ?>
                     <?php foreach ($desa as $row) : ?>
                         <div class="alert alert-warning" role="alert">
@@ -180,7 +185,7 @@
                         </div>
                     <?php endforeach; ?>
                     <div class="alert alert-warning" role="alert">
-                        Ketentuan foto diharapkan untuk memiliki format jpg/jpeg/png dan size foto maksimal 2000 KB
+                        Ketentuan foto diharapkan untuk memiliki format jpg/jpeg/png, ukuran foto 3x4 cm, dan size foto maksimal 2000 KB
                     </div>
                     <?php foreach ($desa as $row) : ?>                        
                         <div class="mb-3">
@@ -234,7 +239,8 @@
     </div>
 </div>
 
-        <!-- modal untuk logout -->
+        <!-- modal untuk input ulang data calon perbekel -->
+        <?php foreach ($desa as $row) : ?>
         <div class="modal fade" id="tambah_ulang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -247,11 +253,12 @@
                 </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url('Home/input_ulang') ?>/<?= session()->get('desa') ?>" class="btn btn-primary">Benar</a>
+                        <a href="<?= base_url('input_ulang') ?>/<?= session()->get('desa') ?>" class="btn btn-danger">Benar</a>
                     </div>                    
                 </div>
             </div>
         </div>
+        <?php endforeach; ?>
 
         <!-- modal untuk logout -->
         <div class="modal fade" id="keluar_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -266,7 +273,7 @@
                 </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url('Home/keluar') ?>" class="btn btn-danger">Keluar</a>
+                        <a href="<?= base_url('keluar') ?>" class="btn btn-danger">Keluar</a>
                     </div>                    
                 </div>
             </div>
