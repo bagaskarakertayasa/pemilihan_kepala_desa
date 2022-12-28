@@ -82,8 +82,11 @@ class admin_desa extends BaseController
         }
 
         $validated = $this->validate([
-			'gambar_calon_1' => 'mime_in[gambar_calon_1,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_1,2048]',
-			'gambar_calon_2' => 'mime_in[gambar_calon_2,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_2,2048]',
+			'gambar_calon_1' => 'uploaded[gambar_calon_1]|mime_in[gambar_calon_1,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_1,2048]|max_dims[gambar_calon_1,354,472]',
+			'gambar_calon_2' => 'uploaded[gambar_calon_2]|mime_in[gambar_calon_2,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_2,2048]|max_dims[gambar_calon_2,354,472]',
+			'gambar_calon_3' => 'mime_in[gambar_calon_3,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_3,2048]|max_dims[gambar_calon_3,354,472]',
+			'gambar_calon_4' => 'mime_in[gambar_calon_4,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_4,2048]|max_dims[gambar_calon_4,354,472]',
+			'gambar_calon_5' => 'mime_in[gambar_calon_5,image/jpg,image/jpeg,image/png]|max_size[gambar_calon_5,2048]|max_dims[gambar_calon_5,354,472]',
 		]);
 
 		if ($validated == FALSE) {			
@@ -238,11 +241,18 @@ class admin_desa extends BaseController
         $session = session();
 
         $validate = $this->validate([
+            'no_tps' => [
+                'rules'  => 'required|is_natural',
+                'errors' => [
+                    'required' => 'Kolom Nomer TPS tidak boleh kosong',
+                    'is_natural' => 'Nomer TPS tidak boleh menggunakan karakter selain angka',
+                ],
+            ],
             'banjar_tps' => [
                 'rules'  => 'required|alpha_space',
                 'errors' => [
                     'required' => 'Kolom Banjar TPS tidak boleh kosong',
-                    'required' => 'Nama Banjar TPS tidak boleh menggunakan karakter selain huruf dan spasi',
+                    'alpha_space' => 'Nama Banjar TPS tidak boleh menggunakan karakter selain huruf dan spasi',
                 ],
             ],
             'jml_pml_tetap' => [
@@ -313,6 +323,7 @@ class admin_desa extends BaseController
         }
         
         $data = [
+            'no_tps'            => $this->request->getPost('no_tps'),
             'banjar_tps'        => $this->request->getPost('banjar_tps'),
             'jml_pml_tetap'     => $this->request->getPost('jml_pml_tetap'),
             'mgn_hak_suara'     => $this->request->getPost('mgn_hak_suara'),
@@ -344,6 +355,13 @@ class admin_desa extends BaseController
         $session = session();
 
         $validate = $this->validate([
+            'no_tps' => [
+                'rules'  => 'required|is_natural',
+                'errors' => [
+                    'required' => 'Kolom Nomer TPS tidak boleh kosong',
+                    'is_natural' => 'Nomer TPS tidak boleh menggunakan karakter selain angka',
+                ],
+            ],
             'banjar_tps' => [
                 'rules'  => 'required|alpha_space',
                 'errors' => [
@@ -421,6 +439,7 @@ class admin_desa extends BaseController
         $id = $this->request->getPost('id_tps');
 
         $data = [
+            'no_tps'            => $this->request->getPost('no_tps'),
             'banjar_tps'        => $this->request->getPost('banjar_tps'),
             'jml_pml_tetap'     => $this->request->getPost('jml_pml_tetap'),
             'mgn_hak_suara'     => $this->request->getPost('mgn_hak_suara'),

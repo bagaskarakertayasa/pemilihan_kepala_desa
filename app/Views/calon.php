@@ -4,8 +4,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="description" content="Itung Cepat Perbekel Kabupaten Tabanan." />
+        <meta name="author" content="Bagaskara Kertayasa" />
         <title>Itung Cepat Perbekel Kabupaten Tabanan</title>
         <link rel="icon" type="image/x-icon"
             href="<?= base_url('img/logo_tbn.png') ?>" />
@@ -29,6 +29,18 @@
             .btn_toggle {
                 margin-left: -3rem;
             }              
+
+            @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
+                .btn_toggle {
+                    margin-left: 0.5rem;
+                }
+            }
+
+            @media screen and (min-device-width: 768px) and (max-device-width: 912px) {
+                .btn_toggle {
+                    margin-left: 0.5rem;
+                }
+            }            
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -96,7 +108,7 @@
                         <div class="row">                            
                             <?php if ($row['calon_1'] != '') : ?>
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card">
+                                    <div class="card mb-3">
                                         <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1" width="354" height="472">
                                         <div class="card-body">
                                             <h6 class="text-center">(1)</h6>
@@ -108,7 +120,7 @@
                                 
                                 <?php if ($row['calon_2'] != '') : ?>
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card">
+                                    <div class="card mb-3">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2" width="354" height="472">
                                         <div class="card-body">
                                             <h6 class="text-center">(2)</h6>
@@ -120,7 +132,7 @@
 
                                 <?php if ($row['calon_3'] != '') : ?>
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card">
+                                    <div class="card mb-3">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3" width="354" height="472">
                                         <div class="card-body">
                                             <h6 class="text-center">(3)</h6>
@@ -132,7 +144,7 @@
 
                                 <?php if ($row['calon_4'] != '') : ?>
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card">
+                                    <div class="card mb-3">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4" width="354" height="472">
                                         <div class="card-body">                
                                             <h6 class="text-center">(4)</h6>                            
@@ -144,7 +156,7 @@
 
                                 <?php if ($row['calon_5'] != '') : ?>
                                 <div class="col-xl-3 col-md-6">
-                                    <div class="card">
+                                    <div class="card mb-3">
                                     <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5" width="354" height="472">
                                         <div class="card-body">
                                             <h6 class="text-center">(5)</h6>
@@ -185,7 +197,7 @@
                         </div>
                     <?php endforeach; ?>
                     <div class="alert alert-warning" role="alert">
-                        Ketentuan foto diharapkan untuk memiliki format jpg/jpeg/png, ukuran foto 3x4 cm, dan size foto maksimal 2000 KB
+                        Ketentuan foto diharuskan untuk memiliki format jpg/jpeg/png, ukuran foto 3x4 cm (354x472) pixels, dan size foto maksimal 2000 KB
                     </div>
                     <?php foreach ($desa as $row) : ?>                        
                         <div class="mb-3">

@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Itung Cepat Perbekel Kabupaten Tabanan." />
+    <meta name="author" content="Bagaskara Kertayasa" />
     <title>Itung Cepat Pemilihan Perbekel Tabanan</title>
     <link rel="icon" type="image/x-icon"
         href="<?= base_url('img/logo_tbn.png') ?>" />

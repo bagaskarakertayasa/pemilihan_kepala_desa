@@ -249,20 +249,83 @@ class admin_pusat extends BaseController
     }  
 
     public function filter_tps()
-    {        
-        $desa = $this->request->getPost('desa');
-        $model = new tps();
-        if ($desa != '') {
-            $tps = $model->getTPS($desa);
-            // echo "<pre>";
-            // print_r($tps);                        
-            return view('daftar_tps', compact('tps'));
+    {       
+        if (session()->get('logged_in') == true) {
+            $desa = $this->request->getPost('desa');
+            $model = new tps();
+            if (!empty($desa)) {
+                $tps = $model->getTPS($desa);                
+                $total = $model->filterTPS($desa);
+
+                foreach ($total as $row) {
+                    $total_calon_1 = $row['sum1'];
+                    $total_calon_2 = $row['sum2'];
+                    $total_calon_3 = $row['sum3'];
+                    $total_calon_4 = $row['sum4'];
+                    $total_calon_5 = $row['sum5'];
+                }
+
+                function percentageOf($number, $everything, $decimals = 2){
+                    return round($number / $everything * 100, $decimals);
+                }
+
+                $numbers = array($total_calon_1, $total_calon_2, $total_calon_3, $total_calon_4, $total_calon_5);
+                $everything = array_sum($numbers);
+
+                $calon_1 = percentageOf($numbers[0], $everything);
+                $calon_2 = percentageOf($numbers[1], $everything);
+                $calon_3 = percentageOf($numbers[2], $everything);
+                $calon_4 = percentageOf($numbers[3], $everything);
+                $calon_5 = percentageOf($numbers[4], $everything);
+         
+                $params = [
+                    'sum1' => $total_calon_1,
+                    'sum2' => $total_calon_2,
+                    'sum3' => $total_calon_3,
+                    'sum4' => $total_calon_4,
+                    'sum5' => $total_calon_5,
+                ];
+
+                $params2 = [
+                    'persen_calon_1' => $calon_1,
+                    'persen_calon_2' => $calon_2,
+                    'persen_calon_3' => $calon_3,
+                    'persen_calon_4' => $calon_4,
+                    'persen_calon_5' => $calon_5,
+                ];
+
+                $res = max($params);
+                $params3 = ['res' => $res];
+                session()->set($params);
+                session()->set($params2);
+                session()->set($params3);
+                // echo "<pre>";
+                // print_r($tps);   
+                return view('daftar_tps', compact('tps'));
+            } else {
+                session()->setFlashData('icon', 'warning');
+                session()->setFlashData('title', 'Inputan Kosong');
+                session()->setFlashData('text', 'Maaf, inputan tidak boleh kosong');            
+                return redirect()->back()->withInput();            
+            }
         } else {
             session()->setFlashData('icon', 'warning');
-            session()->setFlashData('title', 'Inputan Kosong');
-            session()->setFlashData('text', 'Maaf, inputan tidak boleh kosong');            
-            return redirect()->back()->withInput();
-        }
+            session()->setFlashData('title', 'Login');
+            session()->setFlashData('text', 'Maaf, anda diharuskan untuk login terlebih dahulu');
+            return redirect()->to(base_url('login'));
+        }        
+    }
+
+    public function daftar_desa()
+    {
+        if (session()->get('logged_in') == true) {
+            return view('daftar_desa');
+        } else {
+            session()->setFlashData('icon', 'warning');
+            session()->setFlashData('title', 'Login');
+            session()->setFlashData('text', 'Maaf, anda diharuskan untuk login terlebih dahulu');
+            return redirect()->to(base_url('login'));
+        }        
     }
 }
 

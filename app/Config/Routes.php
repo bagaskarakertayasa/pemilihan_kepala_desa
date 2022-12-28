@@ -67,6 +67,11 @@ $routes->get('ubah_status/(:any)', 'admin_pusat::ubah_status/$1');
 // routes untuk fitur tps di admin pusat
 $routes->get('daftar_tps', 'admin_pusat::daftar_tps');
 $routes->post('filter_tps', 'admin_pusat::filter_tps');
+$routes->get('rekap_data/(:any)', 'admin_pusat::rekap_data/$1');
+
+// routes untuk fitur daftar desa
+$routes->get('daftar_desa', 'admin_pusat::daftar_desa');
+
 
 
 /*

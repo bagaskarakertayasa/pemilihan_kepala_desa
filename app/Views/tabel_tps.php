@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="Itung Cepat Perbekel Kabupaten Tabanan." />
+    <meta name="author" content="Bagaskara Kertayasa" />
     <title>Itung Cepat Perbekel Kabupaten Tabanan</title>
     <link rel="icon" type="image/x-icon" href="<?= base_url('img/logo_tbn.png') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,18 @@
 
         .tbh_tps {
             float: right;
+        }
+
+        @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
+        }
+
+        @media screen and (min-device-width: 768px) and (max-device-width: 912px) {
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -103,16 +115,16 @@
                                         <th class="text-center">Tidak Menggunakan Hak Suara</th>
                                         <th class="text-center">Suara Tidak Sah</th>
                                         <?php foreach ($tps as $row) : ?>
-                                            <th class="text-center">(1) <?= $row['calon_1']; ?></th>                                                                                 
-                                            <th class="text-center">(2) <?= $row['calon_2']; ?></th>
+                                            <th class="text-center">(1) <br> <?= $row['calon_1']; ?></th>                                                                                 
+                                            <th class="text-center">(2) <br> <?= $row['calon_2']; ?></th>
                                             <?php if ($row['calon_3'] != '') : ?>
-                                                <th class="text-center">(3) <?= $row['calon_3']; ?></th>
+                                                <th class="text-center">(3) <br> <?= $row['calon_3']; ?></th>
                                             <?php endif; ?>
                                             <?php if ($row['calon_4'] != '') : ?>
-                                                <th class="text-center">(4) <?= $row['calon_4']; ?></th>
+                                                <th class="text-center">(4) <br> <?= $row['calon_4']; ?></th>
                                             <?php endif; ?>
                                             <?php if ($row['calon_5'] != '') : ?>
-                                                <th class="text-center">(4) <?= $row['calon_5']; ?></th>
+                                                <th class="text-center">(5) <br> <?= $row['calon_5']; ?></th>
                                             <?php endif; ?>
                                         <?php break; ?>
                                         <?php endforeach; ?>                                                                                                                    
@@ -124,7 +136,7 @@
                                     <?php foreach ($tps as $row) : ?>
                                         <?php if ($row['id_tps'] != '') : ?>
                                         <tr>                                            
-                                            <td>TPS <?= $no++; ?> BR. <?= $row['banjar_tps']; ?></td>
+                                            <td>TPS <?= $row['no_tps'] ?> BR. <?= $row['banjar_tps']; ?></td>
                                             <td class="text-center"><?= $row['jml_pml_tetap'] ?></td>
                                             <td class="text-center"><?= $row['mgn_hak_suara'] ?></td>
                                             <td class="text-center"><?= $row['tdk_mgn_hak_suara'] ?></td>
@@ -201,9 +213,13 @@
                 <form action="<?= base_url('proses_tambah_tps') ?>" method="post">
                     <?= csrf_field() ?>
                     <div class="mb-3">
+                        <label for="no_tps" class="col-form-label">Nomer TPS</label>
+                        <input type="number" name="no_tps" value="<?= old('no_tps') ?>" class="form-control" placeholder="Masukan Nomer TPS">
+                    </div>
+                    <div class="mb-3">
                         <label for="banjar_tps" class="col-form-label">Banjar TPS</label>
                         <input type="text" name="banjar_tps" value="<?= old('banjar_tps') ?>" class="form-control" placeholder="Masukan Banjar TPS">
-                    </div>
+                    </div>                    
                     <div class="mb-3">
                         <label for="jml_pml_tetap" class="col-form-label">Jumlah Pemilih Tetap</label>
                         <input type="number" name="jml_pml_tetap" value="<?= old('jml_pml_tetap') ?>" class="form-control" placeholder="Masukan Jumlah Pemilih Tetap">
@@ -217,7 +233,7 @@
                         <input type="number" name="tdk_mgn_hak_suara" value="<?= old('tdk_mgn_hak_suara') ?>" class="form-control" placeholder="Masukan jumlah pemilih yang tidak menggunakan hak suara">
                     </div>
                     <div class="mb-3">
-                        <label for="suara_tdk_sah" class="col-form-label">Suara Tidak Sah</label>
+                        <label for="suara_tdk_sah" class="col-form-label">Jumlah Suara Tidak Sah</label>
                         <input type="number" name="suara_tdk_sah" value="<?= old('suara_tdk_sah') ?>" class="form-control" placeholder="Masukan jumlah suara tidak sah">
                     </div> 
                     <?php foreach ($tps as $row) : ?>                        
@@ -274,6 +290,11 @@
                         <?= csrf_field() ?>
                         <input type="text" value="<?= $row['id_tps']; ?>" name="id_tps" hidden>
                         <div class="mb-3">
+                            <label for="no_tps" class="col-form-label">Nomer TPS</label>
+                            <input type="number" name="no_tps" class="form-control" placeholder="Masukan Nomer TPS"
+                                value="<?= old('no_tps', $row['no_tps']) ?>">
+                        </div>
+                        <div class="mb-3">
                             <label for="banjar_tps" class="col-form-label">Banjar TPS</label>
                             <input type="text" name="banjar_tps" class="form-control" placeholder="Masukan Banjar TPS"
                                 value="<?= old('banjar_tps', $row['banjar_tps']); ?>">
@@ -284,17 +305,17 @@
                                 value="<?= old('jml_pml_tetap', $row['jml_pml_tetap']); ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="mgn_hak_suara" class="col-form-label">Jumah Yang Menggunakan Hak Suara</label>
-                            <input type="number" name="mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang menggunakan hak suara"
+                            <label for="mgn_hak_suara" class="col-form-label">Jumah Pemilih Yang Menggunakan Hak Suara</label>
+                            <input type="number" name="mgn_hak_suara" class="form-control" placeholder="Masukan jumlah pemilih yang menggunakan hak suara"
                                 value="<?= old('mgn_hak_suara', $row['mgn_hak_suara']); ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="tdk_mgn_hak_suara" class="col-form-label">Tidak Menggunakan Hak Suara</label>
-                            <input type="number" name="tdk_mgn_hak_suara" class="form-control" placeholder="Masukan jumlah yang tidak menggunakan hak suara"
+                            <label for="tdk_mgn_hak_suara" class="col-form-label">Jumlah Pemilih Yang Tidak Menggunakan Hak Suara</label>
+                            <input type="number" name="tdk_mgn_hak_suara" class="form-control" placeholder="Masukan jumlah pemilih yang tidak menggunakan hak suara"
                                 value="<?= old('tdk_mgn_hak_suara', $row['tdk_mgn_hak_suara']); ?>">
                         </div> 
                         <div class="mb-3">
-                            <label for="suara_tdk_sah" class="col-form-label">Suara Tidak Sah</label>
+                            <label for="suara_tdk_sah" class="col-form-label">Jumlah Suara Tidak Sah</label>
                             <input type="number" name="suara_tdk_sah" class="form-control" placeholder="Masukan jumlah suara tidak sah"
                                 value="<?= old('suara_tdk_sah', $row['suara_tdk_sah']); ?>">
                         </div> 

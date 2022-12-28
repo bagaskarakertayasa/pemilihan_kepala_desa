@@ -5,15 +5,18 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="Itung Cepat Perbekel Kabupaten Tabanan." />
+    <meta name="author" content="Bagaskara Kertayasa" />
     <title>Itung Cepat Perbekel Kabupaten Tabanan</title>
     <link rel="icon" type="image/x-icon" href="<?= base_url('img/logo_tbn.png') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-    <link href="<?= base_url('css/styles.css') ?>" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">    
+    <link href="<?= base_url('css/styles.css') ?>" rel="stylesheet" />    
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">    
+    
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <style>
         body {
@@ -24,7 +27,19 @@
             padding: 0.5rem 0 0.5rem 1rem;            
             width: 50px;
             height: 50px;
-        }                
+        } 
+        
+        @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
+        }
+        
+        @media screen and (min-device-width: 768px) and (max-device-width: 912px) {
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -67,6 +82,9 @@
         </div>
         <div id="layoutSidenav_content">
 
+        <!-- CSRF token --> 
+        <input type="hidden" class="txt_csrfname" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+
             <main>
                 <div class="container-fluid px-4 mb-3">
 
@@ -88,7 +106,7 @@
                                     <?php foreach ($tps as $row) : ?>
                                         <div class="mb-3">
                                             <label for="desa" class="col-form-label">Desa</label>
-                                            <select name="desa" class="form-select" id="inputGroupSelect01">
+                                            <select id='searchByDesa' name="desa" class="form-select" id="inputGroupSelect01">
                                                 <option selected disabled>Silahkan pilih desa</option>                                                                
                                                 <option value="1" <?php if(old('desa', $row['desa']) == '1'){ echo 'selected'; } ?>>Bantiran</option>
                                                 <option value="2" <?php if(old('desa', $row['desa']) == '2'){ echo 'selected'; } ?>>Jelijih Punggang</option>
@@ -112,15 +130,15 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div>                            
 
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                                Tabel Daftar TPS                            
+                                Tabel Daftar TPS
                         </div>
                         <div class="card-body">
-                            <table id="datatablesSimple">
+                            <table id="print" class="table table-bordered mt-1">
                                 <thead>
                                     <tr>                                        
                                         <th class="text-center">TPS</th>
@@ -149,7 +167,7 @@
                                     <?php foreach ($tps as $row) : ?>
                                         <?php if ($row['id_tps'] != '') : ?>
                                         <tr>                                            
-                                            <td><?= $no++; ?> TPS BR. <?= $row['banjar_tps']; ?></td>
+                                            <td>TPS <?= $row['no_tps']; ?> BR. <?= $row['banjar_tps']; ?></td>
                                             <td class="text-center"><?= $row['jml_pml_tetap'] ?></td>
                                             <td class="text-center"><?= $row['mgn_hak_suara'] ?></td>
                                             <td class="text-center"><?= $row['tdk_mgn_hak_suara'] ?></td>
@@ -173,15 +191,20 @@
                         </div>
                     </div>
                     
-                    <div class="row d-flex justify-content-center align-items-center">        
+                    <div class="row d-flex justify-content-center align-items-center">                                
+                        <?php $total = 0; ?>
                         <?php foreach ($tps as $row) : ?>                    
                             <?php if ($row['calon_1'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1" width="354" height="472">
+                                <div class="card m-2 <?= session()->get('res') == session()->get('sum1') ? 'bg-success text-white' : null ?>">
+                                    <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_1']; ?>" class="card-img-top" alt="gambar calon 1">
                                     <div class="card-body">
                                         <h6 class="text-center">(1)</h6>   
-                                        <h5 class="card-title text-center"><?= $row['calon_1']; ?></h5>                                        
+                                        <h5 class="card-title text-center"><?= $row['calon_1']; ?></h5>
+                                        <h6 class="text-center"><?= session()->get('sum1') ?> Suara</h6>                                                                                
+                                        <div class="card-footer d-flex align-items-center justify-content-center">
+                                            <?= session()->get('persen_calon_1') ?>%
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -189,11 +212,15 @@
                             
                             <?php if ($row['calon_2'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2" width="354" height="472">
+                                <div class="card m-2 <?= session()->get('res') == session()->get('sum2') ? 'bg-success text-white' : null ?>">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_2']; ?>" class="card-img-top" alt="gambar calon 2">
                                     <div class="card-body">
                                         <h6 class="text-center">(2)</h6>   
-                                        <h5 class="card-title text-center"><?= $row['calon_2']; ?></h5>                                        
+                                        <h5 class="card-title text-center"><?= $row['calon_2']; ?></h5>
+                                        <h6 class="text-center"><?= session()->get('sum2') ?> Suara</h6>
+                                        <div class="card-footer d-flex align-items-center justify-content-center">
+                                            <?= session()->get('persen_calon_2') ?>%
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -201,11 +228,15 @@
 
                             <?php if ($row['calon_3'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3" width="354" height="472">
+                                <div class="card m-2 <?= session()->get('res') == session()->get('sum3') ? 'bg-success text-white' : null ?>">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_3']; ?>" class="card-img-top" alt="gambar calon 3">
                                     <div class="card-body">
                                         <h6 class="text-center">(3)</h6>   
-                                        <h5 class="card-title text-center"><?= $row['calon_3']; ?></h5>                                        
+                                        <h5 class="card-title text-center"><?= $row['calon_3']; ?></h5>
+                                        <h6 class="text-center"><?= session()->get('sum3') ?> Suara</h6>
+                                        <div class="card-footer d-flex align-items-center justify-content-center">
+                                            <?= session()->get('persen_calon_3') ?>%
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -213,11 +244,15 @@
 
                             <?php if ($row['calon_4'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4" width="354" height="472">
+                                <div class="card m-2 <?= session()->get('res') == session()->get('sum4') ? 'bg-success text-white' : null ?>">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_4']; ?>" class="card-img-top" alt="gambar calon 4">
                                     <div class="card-body">
                                         <h6 class="text-center">(4)</h6>   
                                         <h5 class="card-title text-center"><?= $row['calon_4']; ?></h5>                                        
+                                        <h6 class="text-center"><?= session()->get('sum4') ?> Suara</h6>
+                                        <div class="card-footer d-flex align-items-center justify-content-center">
+                                            <?= session()->get('persen_calon_4') ?>%
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -225,11 +260,15 @@
 
                             <?php if ($row['calon_5'] != '') : ?>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5" width="354" height="472">
+                                <div class="card m-2 <?= session()->get('res') == session()->get('sum5') ? 'bg-success text-white' : null ?>">
+                                <img src="<?= base_url() ?>/upload/<?php echo $row['gambar_calon_5']; ?>" class="card-img-top" alt="gambar calon 5">
                                     <div class="card-body">
                                         <h6 class="text-center">(5)</h6>   
                                         <h5 class="card-title text-center"><?= $row['calon_5']; ?></h5>                                        
+                                        <h6 class="text-center"><?= session()->get('sum5') ?> Suara</h6>
+                                        <div class="card-footer d-flex align-items-center justify-content-center">
+                                            <?= session()->get('persen_calon_5') ?>%
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -272,29 +311,47 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
-    <script src="<?= base_url('js/scripts.js') ?>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="<?= base_url('js/datatables-simple-demo.js') ?>"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            <?php if (session()->getFlashdata('title')) { ?>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: '<?php echo session()->getFlashdata('title') ?>',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            <?php } ?>
+    <script src="<?= base_url('js/scripts.js') ?>"></script>    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+    
+    <script>
+        <?php if (session()->getFlashdata('title')) { ?>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '<?php echo session()->getFlashdata('title') ?>',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        <?php } ?>
 
-            <?php if (session()->getFlashdata('icon')) { ?>
-                Swal.fire({
-                    icon: '<?php echo session()->getFlashdata('icon') ?>',
-                    title: '<?php echo session()->getFlashdata('title') ?>',
-                    text: '<?php echo session()->getFlashdata('text') ?>'
-                })
-            <?php } ?>
-        </script>
+        <?php if (session()->getFlashdata('icon')) { ?>
+            Swal.fire({
+                icon: '<?php echo session()->getFlashdata('icon') ?>',
+                title: '<?php echo session()->getFlashdata('title') ?>',
+                text: '<?php echo session()->getFlashdata('text') ?>'
+            })
+        <?php } ?>
+
+        $(document).ready(function() {
+            $('#print').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf'
+                ]
+            } );
+        } ); 
+    </script>
+
 </body>
 
 </html>

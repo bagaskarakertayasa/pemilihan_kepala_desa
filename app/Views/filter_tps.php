@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="Itung Cepat Perbekel Kabupaten Tabanan." />
+    <meta name="author" content="Bagaskara Kertayasa" />
     <title>Itung Cepat Perbekel Kabupaten Tabanan</title>
     <link rel="icon" type="image/x-icon" href="<?= base_url('img/logo_tbn.png') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,23 @@
             padding: 0.5rem 0 0.5rem 1rem;            
             width: 50px;
             height: 50px;
-        }                
+        }
+        
+        @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
+
+            .tengah {
+                text-align: center;
+            }
+        }
+
+        @media screen and (min-device-width: 768px) and (max-device-width: 912px) {
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -71,9 +87,12 @@
                 <div class="container-fluid px-4">
 
                     <div class="d-flex align-items-center justify-content-center">
-                        <h1 class="mt-4 mb-3">Daftar TPS Tabanan</h1>
+                        <h1 class="mt-4 mb-3">Daftar TPS Tabanan</h1>                        
                     </div>
-                    <p class="d-flex align-items-center justify-content-center">Daftar TPS yang ada di Kabupaten Tabanan</p>
+                    
+                    <div class="d-flex align-items-center justify-content-center">
+                        <p class="tengah">Daftar TPS yang ada di Kabupaten Tabanan</p>    
+                    </div>
                     
                     <?php $validation = \Config\Services::validation(); ?>
                     

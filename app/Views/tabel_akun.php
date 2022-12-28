@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="Itung Cepat Perbekel Kabupaten Tabanan." />
+    <meta name="author" content="Bagaskara Kertayasa" />
     <title>Itung Cepat Perbekel Kabupaten Tabanan</title>
     <link rel="icon" type="image/x-icon" href="<?= base_url('img/logo_tbn.png') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,18 @@
 
         .tbh_akun {
             float: right;
+        }
+
+        @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
+        }
+
+        @media screen and (min-device-width: 768px) and (max-device-width: 912px) {
+            .btn_toggle {
+                margin-left: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -123,13 +135,13 @@
                                                 <td
                                                     class="<?= $row['status'] == 'aktif' ? 'text-success' : 'text-danger' ?>"><?= $row['status'] ?></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal<?= $row['id_akun']; ?>">
+                                                    <button type="button" class="btn btn-success m-1" data-bs-toggle="modal" data-bs-target="#edit_modal<?= $row['id_akun']; ?>">
                                                         Edit
                                                     </button>
-                                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pass_modal<?= $row['id_akun']; ?>">
+                                                    <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#pass_modal<?= $row['id_akun']; ?>">
                                                         Ubah Password
                                                     </button>
-                                                    <button type="button" <?= $row['status'] == 'nonaktif' ? 'disabled' : null ?> class="btn btn-danger"
+                                                    <button type="button" <?= $row['status'] == 'nonaktif' ? 'disabled' : null ?> class="btn btn-danger m-1"
                                                         data-bs-toggle="modal" data-bs-target="#status_modal<?= $row['id_akun']; ?>">Ubah Status</button>
                                                 </td>
                                             </tr>
@@ -145,7 +157,7 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-center small">
-                        <div class="text-muted">Copyright &copy; Your Website <?= date('Y') ?></div>
+                        <div class="text-muted">Copyright &copy; Bagaskara Kertayasa <?= date('Y') ?></div>
                     </div>
                 </div>
             </footer>

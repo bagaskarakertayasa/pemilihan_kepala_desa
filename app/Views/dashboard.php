@@ -4,8 +4,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="description" content="Itung Cepat Perbekel Kabupaten Tabanan." />
+        <meta name="author" content="Bagaskara Kertayasa" />
         <title>Itung Cepat Perbekel Kabupaten Tabanan</title>
         <link rel="icon" type="image/x-icon"
             href="<?= base_url('img/logo_tbn.png') ?>" />
@@ -42,6 +42,18 @@
                 display: table-cell;
                 text-align: center;
                 vertical-align: middle;
+            }
+
+            @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
+                .btn_toggle {
+                    margin-left: 0.5rem;
+                }
+            }
+
+            @media screen and (min-device-width: 768px) and (max-device-width: 912px) {
+                .btn_toggle {
+                    margin-left: 0.5rem;
+                }
             }
         </style>
     </head>

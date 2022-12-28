@@ -14,7 +14,13 @@
         <?php if (session()->get('desa') == null) : ?>
             <a class="nav-link" href="<?= base_url('daftar_tps') ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-vote-yea"></i></div>
-                Daftar TPS Tabanan
+                Daftar TPS
+            </a>
+        <?php endif ?> 
+        <?php if (session()->get('desa') == null) : ?>
+            <a class="nav-link" href="<?= base_url('daftar_desa') ?>">
+                <div class="sb-nav-link-icon"><i class="fas fa-mountain"></i></div>
+                Daftar Desa
             </a>
         <?php endif ?> 
         <?php if (session()->get('desa') != null) : ?>
