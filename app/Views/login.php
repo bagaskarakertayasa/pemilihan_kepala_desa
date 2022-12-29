@@ -23,7 +23,11 @@
 
             @media all and (max-width: 400px) and (orientation : portrait) {
                 .tengah {
-                    width: 350px;                    
+                    width: 350px;                                        
+                }
+
+                .alert {
+                    margin-top: -5em;
                 }
             }
         </style>

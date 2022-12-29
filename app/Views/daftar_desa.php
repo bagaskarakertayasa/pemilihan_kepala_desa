@@ -1,24 +1,109 @@
 <?php $no = 1; ?>
 <?php $db = db_connect() ?>
 <?php 
+// sql query untuk desa Bantiran Kecamatan Pupuan
+$query1 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 1');
+// sql query untuk desa Jelijih Punggang Kecamatan Pupuan
+$query2 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 2');
+// sql query untuk desa Angkah Kecamatan Selemadeg Barat
+$query3 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 3');
+// sql query untuk desa Mundeh Kauh Kecamatan Selemadeg Barat
 $query4 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
     SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
     desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
     SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
     FROM desa LEFT JOIN tps ON id_desa = desa 
     WHERE tps.desa = 4');
+// sql query untuk desa Megati Kecamatan Selemadeg Timur
+$query5 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 5');
+// sql query untuk desa Abiantuwung Kecamatan Kediri
 $query6 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
     SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
     desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
     SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
     FROM desa LEFT JOIN tps ON id_desa = desa 
     WHERE tps.desa = 6');
+// sql query untuk desa Perean Kangin Kecamatan Baturiti
+$query7 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 7');
+// sql query untuk desa Kukuh Kecamatan Marga
+$query8 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 8');
+// sql query untuk desa Baru Kecamatan Marga
 $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
     SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
     desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
     SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
     FROM desa LEFT JOIN tps ON id_desa = desa 
     WHERE tps.desa = 9');
+// sql query untuk desa Marga Dauh Puri Kecamatan Marga
+$query10 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 10');
+// sql query untuk desa Marga Dajan Puri Kecamatan Marga
+$query11 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 11');
+// sql query untuk desa Biaung Kecamatan Penebel
+$query12 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 12');
+// sql query untuk desa Sangketan Kecamatan Penebel
+$query13 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 13');
+// sql query untuk desa Mengesta Kecamatan Penebel
+$query14 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tetap) as sum1,
+    SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,
+    desa.calon_1, desa.calon_2, desa.calon_3, desa.calon_4, desa.calon_5,
+    SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+    FROM desa LEFT JOIN tps ON id_desa = desa 
+    WHERE tps.desa = 14');
+
+// rumus hitung persen menang
+function percentageOf($number, $everything, $decimals = 2){
+    return round($number / $everything * 100, $decimals);
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +122,13 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="<?= base_url('css/styles.css') ?>" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">    
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/b-2.3.3/b-html5-2.3.3/datatables.min.css"/>
+ 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.13.1/b-2.3.3/b-html5-2.3.3/datatables.min.js"></script>
+
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <style>
         body {
@@ -55,6 +147,24 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
 
         .tbh_tps {
             float: right;
+        }
+
+        table {
+            overflow-x: auto;
+            border: solid 1px #ECECEC;            
+        }
+
+        th {
+            padding: 0.5em;
+            border-top: solid 1px #ECECEC;
+            border-left: solid 1px #ECECEC;
+            border-right: solid 1px #ECECEC;
+            border-bottom: solid 2px black;
+        }
+
+        td {
+            padding: 0.5em;
+            border: solid 1px #ECECEC;
         }
 
         @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
@@ -120,7 +230,7 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
                                     Tabel Daftar Desa
                             </div>                        
                             <div class="card-body">
-                                <table id="datatablesSimple" class="table table-bordered mt-1">
+                                <table id="print">
                                     <thead>
                                         <tr>                                        
                                             <th class="text-center">No</th>
@@ -130,11 +240,147 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
                                             <th class="text-center">Jumlah Yang Menggunakan Hak Suara</th>
                                             <th class="text-center">Jumlah Yang Tidak Menggunakan Hak Suara</th>
                                             <th class="text-center">Suara Tidak Sah</th>                                                
-                                            <th class="text-center" colspan="5">Nama Calon Perbekel</th>
-                                            <th class="text-center">Calon Perbekel Terpilih</th>                                            
+                                            <th colspan="5" class="text-center">Nama Calon Perbekel</th>
+                                            <th class="text-center">Calon Perbekel Terpilih</th>
+                                            <th class="text-center">Persentase</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>                                  
+                                            <?php foreach ($query1->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query2->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query3->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>
                                         <tr>                                  
                                             <?php foreach ($query4->getResult() as $row) : ?>
                                                 <td class="text-center"><?= $no++; ?></td>
@@ -165,8 +411,66 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
                                                         }
                                                     ?>
                                                 </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
                                             <?php endforeach ?>                                                
-                                        </tr>                                        
+                                        </tr> 
+                                        <tr>                                  
+                                            <?php foreach ($query5->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>                                       
                                         <tr>                                  
                                             <?php foreach ($query6->getResult() as $row) : ?>
                                                 <td class="text-center"><?= $no++; ?></td>
@@ -197,8 +501,111 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
                                                         }
                                                     ?>
                                                 </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
                                             <?php endforeach ?>                                                
-                                        </tr>          
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query7->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>  
+                                        <tr>                                  
+                                            <?php foreach ($query8->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>        
                                         <tr>
                                             <?php foreach ($query9->getResult() as $row) : ?>
                                                 <td class="text-center"><?= $no++; ?></td>
@@ -229,7 +636,245 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
                                                         }
                                                     ?>
                                                 </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
                                             <?php endforeach ?>
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query10->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query11->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query12->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query13->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
+                                        </tr>
+                                        <tr>                                  
+                                            <?php foreach ($query14->getResult() as $row) : ?>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-center"><?= $row->nama_desa; ?></td>
+                                                <td class="text-center"><?= $row->kecamatan; ?></td>
+                                                <td class="text-center"><?= $row->sum1 ?></td>
+                                                <td class="text-center"><?= $row->sum2 ?></td>
+                                                <td class="text-center"><?= $row->sum3 ?></td>
+                                                <td class="text-center"><?= $row->sum4 ?></td>                                                    
+                                                <td class="text-center"><?= $row->calon_1; ?><br><?= $row->sum5 ?></td>
+                                                <td class="text-center"><?= $row->calon_2; ?><br><?= $row->sum6 ?></td>
+                                                <td class="text-center"><?= $row->calon_3; ?><br><?= $row->sum7 ?></td>
+                                                <td class="text-center"><?= $row->calon_4; ?><br><?= $row->sum8 ?></td>
+                                                <td class="text-center"><?= $row->calon_5; ?><br><?= $row->sum9 ?></td>
+                                                <td class="text-center">                                                        
+                                                    <?php  
+                                                        $a = max($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        if ($row->sum5 == $a) {
+                                                            echo $row->calon_1;
+                                                        } else if ($row->sum6 == $a) {
+                                                            echo $row->calon_2;
+                                                        } else if ($row->sum7 == $a) {
+                                                            echo $row->calon_3;
+                                                        } else if ($row->sum8 == $a) {
+                                                            echo $row->calon_4;
+                                                        } else {
+                                                            echo $row->calon_5;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php  
+                                                        $numbers = array($row->sum5, $row->sum6, $row->sum7, $row->sum8, $row->sum9);
+                                                        $everything = array_sum($numbers);
+
+                                                        if ($everything == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $pemenang = percentageOf($a, $everything);
+                                                            echo $pemenang.'%';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach ?>                                                
                                         </tr>
                                             
                                     </tbody>
@@ -276,25 +921,43 @@ $query9 = $db->query('SELECT desa.nama_desa, desa.kecamatan, SUM(tps.jml_pml_tet
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="<?= base_url('js/datatables-simple-demo.js') ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            <?php if (session()->getFlashdata('title')) { ?>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: '<?php echo session()->getFlashdata('title') ?>',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            <?php } ?>
 
-            <?php if (session()->getFlashdata('icon')) { ?>
-                Swal.fire({
-                    icon: '<?php echo session()->getFlashdata('icon') ?>',
-                    title: '<?php echo session()->getFlashdata('title') ?>',
-                    text: '<?php echo session()->getFlashdata('text') ?>'
-                })
-            <?php } ?>
-        </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>        
+
+    <script>
+        <?php if (session()->getFlashdata('title')) { ?>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '<?php echo session()->getFlashdata('title') ?>',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        <?php } ?>
+
+        <?php if (session()->getFlashdata('icon')) { ?>
+            Swal.fire({
+                icon: '<?php echo session()->getFlashdata('icon') ?>',
+                title: '<?php echo session()->getFlashdata('title') ?>',
+                text: '<?php echo session()->getFlashdata('text') ?>'
+            })
+        <?php } ?>
+
+        $(document).ready(function() {
+            $('#print').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel'
+                ],                
+            } );
+        } ); 
+    </script>
 </body>
 
 </html>
