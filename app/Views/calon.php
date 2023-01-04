@@ -28,7 +28,7 @@
             
             .btn_toggle {
                 margin-left: -3rem;
-            }              
+            }            
 
             @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
                 .btn_toggle {
@@ -58,16 +58,7 @@
                 </div>
             </form>
             <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#keluar_modal">Keluar</button></li>
-                </li>
-            </ul>
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"></ul>
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -301,6 +292,12 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
+            $(document).ready(function(){                
+                $("#keluar").click(function(){
+                $("#keluar_modal").modal("show");
+                });
+            });
+
             <?php if (session()->getFlashdata('title')) { ?>
                 Swal.fire({
                     position: 'center',

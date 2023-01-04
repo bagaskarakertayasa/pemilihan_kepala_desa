@@ -210,7 +210,7 @@ class admin_desa extends BaseController
                 return redirect()->back()->withInput(); 
             }    
 
-            $session =session();
+            $session = session();
             $tps = new tps();        
             $data['tps'] = $tps->getTPS($id);
             $data2 = $tps->getTPS($id);
@@ -223,11 +223,11 @@ class admin_desa extends BaseController
                     return redirect()->back()->withInput();
                 } else {
                     return view('tabel_tps', $data);
+
+                    // echo "<pre>";
+                    // print_r($data);
                 }
             }            
-            
-            // echo "<pre>";
-            // print_r($data);
         } else {
             session()->setFlashData('icon', 'warning');
             session()->setFlashData('title', 'Login');

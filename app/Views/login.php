@@ -21,13 +21,18 @@
                 height: 50%;
             }
 
-            @media all and (max-width: 400px) and (orientation : portrait) {
+            .alert {
+                margin-top: -1em;
+            }
+
+            @media all and (max-width: 450px) and (orientation : portrait) {
                 .tengah {
-                    width: 350px;                                        
+                    width: 350px;
+                    padding: 1em;                                        
                 }
 
                 .alert {
-                    margin-top: -5em;
+                    margin-top: -8em;
                 }
             }
         </style>
@@ -48,9 +53,9 @@
                                 <?php endif; ?>                  
                                 <div class="card shadow-lg border-0 rounded-lg mt-3">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
-                                    <div class="card-body">
-                                        <?php $validation = \Config\Services::validation(); ?>
+                                    <div class="card-body">                                        
                                         <form action="<?= base_url('proses_login') ?>" method="POST"> 
+                                            <?= csrf_field() ?>
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" name="username" value="<?= old('username') ?>" id="inputEmail" type="username" placeholder="Username" />
                                                 <label for="inputEmail">Username</label>                                            
@@ -60,7 +65,7 @@
                                                 <label for="inputPassword">Password</label>                                                
                                             </div>                                            
                                             <div class="d-grid mt-4 mb-0">
-                                                <button class="btn btn-primary" name="submit" type="submit">Login</button>
+                                                <button class="btn btn-primary btn-lg" name="submit" type="submit">Login</button>
                                             </div>                                                                                        
                                         </form>
                                     </div>
@@ -81,6 +86,24 @@
                 </footer>
             </div>
         </div>
+                                
+        <div class="modal" id="modalError" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Show a second modal and hide this one with the button below.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<?= base_url('js/scripts.js') ?>"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

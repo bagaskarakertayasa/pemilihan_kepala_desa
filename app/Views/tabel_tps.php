@@ -32,6 +32,11 @@
 
         .tbh_tps {
             float: right;
+        }        
+
+        .tbl_aksi {
+            border-right-style: hidden;
+            border-bottom-style: hidden;
         }
 
         @media screen and (min-device-width: 350px) and (max-device-width: 700px) and (orientation : portrait){
@@ -63,19 +68,7 @@
             </div>
         </form>
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#keluar_modal">Keluar</button></li>
-                </ul>
-            </li>
-        </ul>
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"></ul>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -111,8 +104,8 @@
                                     <tr>
                                         <th class="text-center">TPS</th>
                                         <th class="text-center">Jumlah Pemilih Tetap</th>
-                                        <th class="text-center">Menggunakan Hak Suara</th>
-                                        <th class="text-center">Tidak Menggunakan Hak Suara</th>
+                                        <th class="text-center">Jumlah Pemilih Yang Menggunakan Hak Suara</th>
+                                        <th class="text-center">Jumlah Pemilih Yang Tidak Menggunakan Hak Suara</th>
                                         <th class="text-center">Suara Tidak Sah</th>
                                         <?php foreach ($tps as $row) : ?>
                                             <th class="text-center">(1) <br> <?= $row['calon_1']; ?></th>                                                                                 
@@ -128,6 +121,7 @@
                                             <?php endif; ?>
                                         <?php break; ?>
                                         <?php endforeach; ?>                                                                                                                    
+                                        <th class="text-center">Persentase Suara Masuk</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -151,7 +145,15 @@
                                             <?php endif; ?>         
                                             <?php if ($row['calon_5'] != '') : ?>
                                                 <td class="text-center"><?= $row['calon5']; ?></td>
-                                            <?php endif; ?>                                            
+                                            <?php endif; ?>       
+                                            <td class="text-center">
+                                                <?php 
+                                                    $array = array($row['calon1'], $row['calon2'], $row['calon3'], $row['calon4'], $row['calon5']);
+                                                    $sum = array_sum($array);
+                                                    $total = $sum / $row['mgn_hak_suara'] * 100;
+                                                    echo round($total, 2)."%";
+                                                ?>
+                                            </td>                                     
                                             <td>
                                                 <button type="button" class="m-1 btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal<?= $row['id_tps']; ?>">
                                                     Edit
@@ -162,7 +164,40 @@
                                             </td>
                                         </tr>
                                         <?php endif; ?>
-                                    <?php endforeach; ?>
+                                    <?php endforeach; ?>                                    
+                                    <?php 
+                                        $db = db_connect();
+                                        $ses = session()->get('desa');
+                                        $query = $db->query(' SELECT SUM(tps.jml_pml_tetap) as sum1,
+                                            SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,                                            
+                                            SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
+                                            FROM desa LEFT JOIN tps ON id_desa = desa 
+                                            WHERE tps.desa = '.$ses);
+                                    ?>                                    
+                                    <?php foreach ($query->getResult() as $value) : ?>
+                                        <tr>
+                                            <td class="text-center">Jumlah</td>
+                                            <td class="text-center"><?php echo $value->sum1; ?></td>
+                                            <td class="text-center"><?php echo $value->sum2; ?></td>
+                                            <td class="text-center"><?php echo $value->sum3; ?></td>
+                                            <td class="text-center"><?php echo $value->sum4; ?></td>
+                                            <td class="text-center"><?php echo $value->sum5; ?></td>
+                                            <td class="text-center"><?php echo $value->sum6; ?></td>
+                                            <td class="text-center <?php echo ($value->sum7 == null) ? 'd-none' : null; ?>"><?php echo $value->sum7 ?></td>
+                                            <td class="text-center <?php echo ($value->sum8 == null) ? 'd-none' : null; ?>"><?php echo $value->sum8 ?></td>
+                                            <td class="text-center <?php echo ($value->sum9 == null) ? 'd-none' : null; ?>"><?php echo $value->sum9 ?></td>
+                                            <td class="text-center">
+                                                <?php 
+                                                    $array = array($value->sum5, $value->sum6, $value->sum7, $value->sum8, $value->sum9);
+                                                    $sum = array_sum($array);
+                                                    $total = $sum / $value->sum2 * 100;
+                                                    echo round($total, 2)."%";
+                                                ?>
+                                            </td>
+                                            <td class="tbl_aksi"></td>
+                                        </tr>
+                                    <?php break ?>
+                                    <?php endforeach ?>
                                 </tbody>
                             </table>
                         </div>

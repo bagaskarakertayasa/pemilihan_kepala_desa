@@ -39,5 +39,8 @@
 </div>
 <div class="sb-sidenav-footer">
     <div class="small">Logged in as:</div>
-    <?= session()->get('nama_depan') ?> <?= session()->get('nama_belakang') ?>
+    <?= session()->get('nama_depan') ?> <?= session()->get('nama_belakang') ?> <br>
+    <div class="d-grid mt-2">
+        <button class="btn btn-danger" type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#keluar_modal">Keluar</button>
+    </div>
 </div>

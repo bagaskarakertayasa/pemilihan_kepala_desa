@@ -20,11 +20,11 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-        }
-
-        .background {
+            background-image: url('<?= base_url('img/bg.png') ?>');
             background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100%;           
         }
 
         .judul_apk {
@@ -34,14 +34,17 @@
         .bagian_footer {
             opacity: 0.3;
         }
+
+        @media (max-width: 600px) {
+            body {
+                background-image: url('<?= base_url('img/bg2.png') ?>');
+            }
+        }            
     </style>
 
 </head>
 
-<body>
-    <div class="background">
-        <img src="<?= base_url('img/bg.png') ?>" alt="background">
-    </div>
+<body>    
     <div class="tengah">
         <div class="container px-4 px-lg-5 h-100 pb-5">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">

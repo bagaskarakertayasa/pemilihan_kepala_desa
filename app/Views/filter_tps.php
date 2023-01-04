@@ -59,19 +59,7 @@
             </div>
         </form>
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#keluar_modal">Keluar</button></li>
-                </ul>
-            </li>
-        </ul>
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"></ul>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -108,20 +96,13 @@
                                         <label for="desa" class="col-form-label">Desa</label>
                                         <select name="desa" class="form-select" id="inputGroupSelect01">
                                             <option selected disabled>Silahkan pilih desa</option>                                                                
-                                            <option value="1" <?php if(old('desa') == '1'){ echo 'selected'; } ?>>Bantiran</option>
-                                            <option value="2" <?php if(old('desa') == '2'){ echo 'selected'; } ?>>Jelijih Punggang</option>
-                                            <option value="3" <?php if(old('desa') == '3'){ echo 'selected'; } ?>>Angkah</option>
-                                            <option value="4" <?php if(old('desa') == '4'){ echo 'selected'; } ?>>Mundeh Kauh</option>
-                                            <option value="5" <?php if(old('desa') == '5'){ echo 'selected'; } ?>>Megati</option>
-                                            <option value="6" <?php if(old('desa') == '6'){ echo 'selected'; } ?>>Abiantuwung</option>
-                                            <option value="7" <?php if(old('desa') == '7'){ echo 'selected'; } ?>>Perean Kangin</option>
-                                            <option value="8" <?php if(old('desa') == '8'){ echo 'selected'; } ?>>Kukuh</option>
-                                            <option value="9" <?php if(old('desa') == '9'){ echo 'selected'; } ?>>Baru</option>
-                                            <option value="10" <?php if(old('desa') == '10'){ echo 'selected'; } ?>>Marga Dauh Puri</option>
-                                            <option value="11" <?php if(old('desa') == '11'){ echo 'selected'; } ?>>Marga Dajan Puri</option>
-                                            <option value="12" <?php if(old('desa') == '12'){ echo 'selected'; } ?>>Biaung</option>
-                                            <option value="13" <?php if(old('desa') == '13'){ echo 'selected'; } ?>>Sangketan</option>
-                                            <option value="14" <?php if(old('desa') == '14'){ echo 'selected'; } ?>>Mengesta</option>                               
+                                            <?php  
+                                                $db = db_connect();
+                                                $query = $db->query('SELECT * FROM desa ORDER BY nama_desa');
+                                            ?>
+                                            <?php foreach($query->getResult() as $row) : ?>
+                                                <option value="<?= $row->id_desa; ?>" <?php if(old('desa') == $row->id_desa){ echo 'selected'; } ?>><?= $row->nama_desa; ?></option>
+                                            <?php endforeach ?>                     
                                         </select>
                                     </div>
                                     <input type="submit" value="Ambil" class="btn btn-primary float-end">
