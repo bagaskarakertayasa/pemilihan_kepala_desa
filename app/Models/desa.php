@@ -19,7 +19,8 @@ class desa extends Model
         'gambar_calon_2',
         'gambar_calon_3',
         'gambar_calon_4',
-        'gambar_calon_5'
+        'gambar_calon_5',
+        'updated_at',
     ];
 
     // public function tambah_akun($data)

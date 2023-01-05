@@ -20,6 +20,7 @@ class tps extends Model
         'calon4',
         'calon5',
         'desa',
+        'created_at'
     ];
 
     public function getTPS($id)

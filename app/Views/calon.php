@@ -292,12 +292,6 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
-            $(document).ready(function(){                
-                $("#keluar").click(function(){
-                $("#keluar_modal").modal("show");
-                });
-            });
-
             <?php if (session()->getFlashdata('title')) { ?>
                 Swal.fire({
                     position: 'center',

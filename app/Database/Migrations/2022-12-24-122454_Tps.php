@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Tps extends Migration
 {
@@ -60,6 +61,10 @@ class Tps extends Migration
             'desa' => [
                 'type' => 'INT',
                 'constraint' => 11,                
+            ],
+            'created_at' => [
+                'type'    => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
             ],
         ]);
         $this->forge->addKey('id_tps', true);

@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Akun extends Migration
 {
@@ -42,6 +43,10 @@ class Akun extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
                 'null' => true,
+            ],
+            'created_at' => [
+                'type'    => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
             ],
         ]);
         $this->forge->addKey('id_akun', true);

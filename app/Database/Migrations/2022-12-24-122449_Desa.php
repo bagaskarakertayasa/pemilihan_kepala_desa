@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Desa extends Migration
 {
@@ -61,6 +62,10 @@ class Desa extends Migration
             'gambar_calon_5' => [
                 'type' => 'VARCHAR',
                 'constraint' => 200,                
+            ],
+            'updated_at' => [
+                'type' => 'datetime',
+                'null' => true,
             ],
         ]);
         $this->forge->addKey('id_desa', true);        

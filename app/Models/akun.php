@@ -14,7 +14,8 @@ class akun extends Model
         'email',
         'password',        
         'desa',        
-        'status'        
+        'status',        
+        'created_at'        
     ];
 
     public function tambah_akun($data)

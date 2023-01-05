@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\desa;
 use App\Models\tps;
+use CodeIgniter\I18n\Time;
 
 class admin_desa extends BaseController
 {
@@ -154,7 +155,11 @@ class admin_desa extends BaseController
                 'gambar_calon_3' => $calon3,                                
                 'gambar_calon_4' => $calon4,                                
                 'gambar_calon_5' => $calon5,                                
+                'updated_at' => Time::now('Asia/Makassar')->toDateTimeString()
             ];
+
+            // echo '<pre>';
+            // print_r($data);
 
             try {
                 $model = new desa();
@@ -166,8 +171,7 @@ class admin_desa extends BaseController
                 session()->setFlashData('title', 'Kesalahan Sistem');
                 session()->setFlashData('text', 'Maaf, terjadi kesalahan pada sistem harap coba beberapa saat lagi');
                 return redirect()->back()->withInput();
-            }
-            
+            }            
         }                
     }
 
@@ -221,7 +225,7 @@ class admin_desa extends BaseController
                     $session->setFlashData('title', 'Data Calon Perbekel Kosong');
                     $session->setFlashData('text', 'Maaf, diharapkan untuk mengisi data calon perbekel terlebih dahulu');
                     return redirect()->back()->withInput();
-                } else {
+                } else {                    
                     return view('tabel_tps', $data);
 
                     // echo "<pre>";
