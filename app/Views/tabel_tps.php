@@ -42,7 +42,7 @@
         @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
             .btn_toggle {
                 margin-left: 0.5rem;
-            }
+            }            
         }
 
         @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -72,7 +72,7 @@
         <button class="btn_toggle btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <div class="d-none d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0">
-            <button class="btn btn-danger" type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#keluar_modal">Keluar</button>
+            <button class="btn btn-danger" type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#keluar_modal">Keluar<i class="ms-2 fas fa-sign-out"></i></button>
         </div>
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"></ul>
     </nav>
@@ -174,7 +174,7 @@
                                     <?php 
                                         $db = db_connect();
                                         $ses = session()->get('desa');
-                                        $query = $db->query(' SELECT SUM(tps.jml_pml_tetap) as sum1,
+                                        $query = $db->query('SELECT SUM(tps.jml_pml_tetap) as sum1,
                                             SUM(tps.mgn_hak_suara) as sum2, SUM(tps.tdk_mgn_hak_suara) as sum3, SUM(tps.suara_tdk_sah) as sum4,                                            
                                             SUM(tps.calon1) as sum5, SUM(tps.calon2) as sum6, SUM(tps.calon3) as sum7, SUM(tps.calon4) as sum8, SUM(tps.calon5) as sum9
                                             FROM desa LEFT JOIN tps ON id_desa = desa 

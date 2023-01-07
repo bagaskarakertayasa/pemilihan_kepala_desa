@@ -21,10 +21,11 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-image: url('<?= base_url('img/bg.png') ?>');
-            background-size: cover;
+            background-position: bottom;
             background-repeat: no-repeat;
-            background-attachment: fixed;
-            min-height: 100%;           
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
         }
 
         .judul_apk {
@@ -35,23 +36,52 @@
             opacity: 0.3;
         }
 
+        .img_logo {
+            width: 100px;
+            height: 100px;
+        }
+
+        .img_bupati {
+            width: 350px;
+            height: 250px;
+        }
+
         @media (max-width: 600px) {
             body {
-                background-image: url('<?= base_url('img/bg2.png') ?>');
+                background-image: url('<?= base_url('img/bg2.png') ?>');                
+            }
+
+            .container {
+                padding: 2em;
+            }
+
+            .img_logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .img_bupati {
+                width: 300px;
+                height: 200px;
+            }
+
+            .judul_apk {
+                font-size: 25px;
+                margin-top: -0.5em;
             }
         }            
     </style>
 
 </head>
 
-<body>    
+<body>        
     <div class="tengah">
         <div class="container px-4 px-lg-5 h-100 pb-5">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-8 align-self-end">
                     <img src="<?= base_url('img/logo_tbn.png') ?>"
-                        class="mb-3" width="100px" height="100px"><br>
-                    <img class="mb-3" src="<?= base_url('img/bupati_tabanan.png') ?>" alt="gambar bupati tabanan" width="350px" height="250px">
+                        class="img_logo mb-3"><br>
+                    <img class="img_bupati mb-3" src="<?= base_url('img/bupati_tabanan.png') ?>" alt="gambar bupati tabanan">
                     <h3 class="text-white fw-semibold">TABANAN ERA BARU (AUM)</h3>
                 </div>
                 <div class="col-lg-10 align-self-baseline">
@@ -63,10 +93,8 @@
             </div>
         </div>
     </div>
-    <div class="bagian_footer fixed-bottom py-3">
-        <div class="container px-4 px-lg-5">
-            <div class="small text-center text-light">Copyright &copy; 2022 - Bagaskara Kertayasa</div>
-        </div>
+    <div class="bagian_footer fixed-bottom">        
+        <div class="mb-2 small text-center text-light">Copyright &copy; <?= date('Y') ?> - Bagaskara Kertayasa</div>        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
