@@ -46,6 +46,18 @@
             height: 250px;
         }
 
+        @media (max-width: 1280px) {
+            .img_logo {
+                width: 75px;
+                height: 75px;
+            }
+
+            .img_bupati {
+                width: 280px;
+                height: 200px;
+            }
+        }
+
         @media (max-width: 600px) {
             body {
                 background-image: url('<?= base_url('img/bg2.png') ?>');                
@@ -69,12 +81,19 @@
                 font-size: 25px;
                 margin-top: -0.5em;
             }
+
+            .blur {                
+                backdrop-filter: blur(5px);
+                height: 100vh;
+                width: 100%;
+            }
         }            
     </style>
 
 </head>
 
 <body>        
+    <div class="blur"></div>
     <div class="tengah">
         <div class="container px-4 px-lg-5 h-100 pb-5">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">

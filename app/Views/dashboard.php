@@ -55,14 +55,14 @@
                 }            
             }
 
-            @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            @media (min-width: 768px) and (max-width: 1024px) {
                 .btn_toggle {
-                    margin-left: 0.5rem;
+                    margin-left: -1rem;
                 }
 
                 .btn-hide {
                     display: none;
-                }
+                }                            
             }
 
             @media only screen and (min-width : 1224px) {
@@ -79,10 +79,10 @@
             <a class="navbar-brand ps-2" href="<?= base_url('dashboard') ?>">Itung Cepat</a>
             <!-- Sidebar Toggle-->
             <button class="btn_toggle btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
+            <!-- Navbar Search-->            
             <div class="d-none d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0">
                 <button class="btn btn-danger" type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#keluar_modal">Keluar<i class="ms-2 fas fa-sign-out"></i></button>
-            </div>
+            </div>            
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"></ul>
         </nav>

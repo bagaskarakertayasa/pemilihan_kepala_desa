@@ -43,8 +43,7 @@
             margin-top: -1em;
         }
 
-        .blur {
-            background: rgba(255, 255, 255, 0.2);
+        .blur {            
             backdrop-filter: blur(8px);
             height: 100vh;
             width: 100%;

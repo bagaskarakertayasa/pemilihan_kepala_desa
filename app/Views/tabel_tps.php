@@ -45,14 +45,14 @@
             }            
         }
 
-        @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        @media (min-width: 768px) and (max-width: 1024px) {
             .btn_toggle {
-                margin-left: 0.5rem;
+                margin-left: -1rem;
             }
 
             .btn-hide {
                 display: none;
-            }
+            }                            
         }
 
         @media only screen and (min-width : 1224px) {
@@ -156,8 +156,12 @@
                                                 <?php 
                                                     $array = array($row['calon1'], $row['calon2'], $row['calon3'], $row['calon4'], $row['calon5']);
                                                     $sum = array_sum($array);
-                                                    $total = $sum / $row['mgn_hak_suara'] * 100;
-                                                    echo round($total, 2)."%";
+                                                    if ($sum == 0) {
+                                                        echo '';
+                                                    } else {
+                                                        $total = $sum / $row['mgn_hak_suara'] * 100;
+                                                        echo round($total, 2)."%";
+                                                    }                                                    
                                                 ?>
                                             </td>                                     
                                             <td>
@@ -181,28 +185,34 @@
                                             WHERE tps.desa = '.$ses);
                                     ?>                                    
                                     <?php foreach ($query->getResult() as $value) : ?>
-                                        <tr class="fw-bold">
-                                            <td class="text-center">Jumlah</td>
-                                            <td class="text-center"><?php echo $value->sum1; ?></td>
-                                            <td class="text-center"><?php echo $value->sum2; ?></td>
-                                            <td class="text-center"><?php echo $value->sum3; ?></td>
-                                            <td class="text-center"><?php echo $value->sum4; ?></td>
-                                            <td class="text-center"><?php echo $value->sum5; ?></td>
-                                            <td class="text-center"><?php echo $value->sum6; ?></td>
-                                            <td class="text-center <?php echo ($value->sum7 == null) ? 'd-none' : null; ?>"><?php echo $value->sum7 ?></td>
-                                            <td class="text-center <?php echo ($value->sum8 == null) ? 'd-none' : null; ?>"><?php echo $value->sum8 ?></td>
-                                            <td class="text-center <?php echo ($value->sum9 == null) ? 'd-none' : null; ?>"><?php echo $value->sum9 ?></td>
-                                            <td class="text-center">
-                                                <?php 
-                                                    $array = array($value->sum5, $value->sum6, $value->sum7, $value->sum8, $value->sum9);
-                                                    $sum = array_sum($array);
-                                                    $total = $sum / $value->sum2 * 100;
-                                                    echo round($total, 2)."%";
-                                                ?>
-                                            </td>
-                                            <td class="tbl_aksi"></td>
-                                        </tr>
-                                    <?php break ?>
+                                        <?php if (!empty($value->sum1)) : ?>
+                                            <tr class="fw-bold">
+                                                <td class="text-center">Jumlah</td>
+                                                <td class="text-center"><?php echo $value->sum1; ?></td>
+                                                <td class="text-center"><?php echo $value->sum2; ?></td>
+                                                <td class="text-center"><?php echo $value->sum3; ?></td>
+                                                <td class="text-center"><?php echo $value->sum4; ?></td>
+                                                <td class="text-center"><?php echo $value->sum5; ?></td>
+                                                <td class="text-center"><?php echo $value->sum6; ?></td>
+                                                <td class="text-center <?php echo ($value->sum7 == null) ? 'd-none' : null; ?>"><?php echo $value->sum7 ?></td>
+                                                <td class="text-center <?php echo ($value->sum8 == null) ? 'd-none' : null; ?>"><?php echo $value->sum8 ?></td>
+                                                <td class="text-center <?php echo ($value->sum9 == null) ? 'd-none' : null; ?>"><?php echo $value->sum9 ?></td>
+                                                <td class="text-center">
+                                                    <?php 
+                                                        $array = array($value->sum5, $value->sum6, $value->sum7, $value->sum8, $value->sum9);
+                                                        $sum = array_sum($array);
+                                                        if ($sum == 0) {
+                                                            echo '';
+                                                        } else {
+                                                            $total = $sum / $value->sum2 * 100;
+                                                            echo round($total, 2)."%";
+                                                        }                                                    
+                                                    ?>
+                                                </td>
+                                                <td class="tbl_aksi"></td>
+                                            </tr>
+                                            <?php break ?>
+                                        <?php endif ?>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
@@ -444,7 +454,7 @@
                     title: '<?php echo session()->getFlashdata('title') ?>',
                     text: '<?php echo session()->getFlashdata('text') ?>'
                 })
-            <?php } ?>
+            <?php } ?>            
         </script>
 </body>
 

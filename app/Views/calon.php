@@ -41,14 +41,14 @@
                 }            
             }
 
-            @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            @media (min-width: 768px) and (max-width: 1024px) {
                 .btn_toggle {
-                    margin-left: 0.5rem;
+                    margin-left: -1rem;
                 }
 
                 .btn-hide {
                     display: none;
-                }
+                }                            
             }
 
             @media only screen and (min-width : 1224px) {
